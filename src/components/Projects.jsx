@@ -249,8 +249,8 @@ const Projects = ({ theme, background }) => {
                 className={`project-card scroll-fade-in group rounded-xl overflow-hidden shadow-lg p-4 ${background && background.image ? 'liquid-glass-strong' : (theme === 'dark' ? 'liquid-glass-dark' : 'liquid-glass-light')}`}
               >
                 {/* 顶部信息 */}
-                <div className="mb-4 flex items-center justify-between">
-                  <div className={`text-xs font-mono text-gray-600 dark:text-gray-300 flex items-center py-2 px-3 rounded-full inline-block liquid-glass ${theme === 'dark' ? 'liquid-glass-dark' : 'liquid-glass-light'}`}>
+                <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                  <div className={`text-xs font-mono text-gray-600 dark:text-gray-300 flex items-center py-2 px-3 rounded-full inline-block liquid-glass ${theme === 'dark' ? 'liquid-glass-dark' : 'liquid-glass-light'} sm:order-1 order-2`}>
                     <span className="mr-2 text-gray-400 dark:text-gray-500">
                       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <circle cx="12" cy="12" r="10"></circle>
@@ -261,7 +261,7 @@ const Projects = ({ theme, background }) => {
                     <span className="text-gray-400 dark:text-gray-500">https://</span>
                     <span className="text-gray-600 dark:text-gray-300">{project.url.replace('https://', '').replace('http://', '').replace('www.', '')}</span>
                   </div>
-                  <h3 className={`text-base font-medium ml-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+                  <h3 className={`text-base font-medium mb-2 sm:mb-0 sm:ml-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'} sm:order-2 order-1`}>
                     {project.name}
                   </h3>
                 </div>
