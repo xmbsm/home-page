@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 引入卓特自由体字体 */
+@font-face {
+  font-family: 'ZhuoTe';
+  src: url('/fonts/ZTZiYouTi.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
 :root {
   --primary: #3B82F6;
   --secondary: #10B981;
@@ -10,7 +19,7 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
   color: var(--dark);
   background-color: var(--light);
 }
