@@ -33,10 +33,10 @@ export default function Home() {
           <div className="absolute bottom-20 left-1/4 w-64 h-64 bg-gradient-to-tr from-blue-400/25 to-teal-300/20 rounded-full blur-3xl"></div>
         </div>
         
-        <div className="relative z-10 container mx-auto px-4 h-full flex flex-col items-center justify-center" style={{ transform: 'translateY(-100px)' }}>
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 max-w-[1280px] h-full flex flex-col items-center justify-center">
           {/* Main title */}
           <div className="text-center mb-28">
-            <h1 className={`text-7xl font-bold mb-4 tracking-wider`} style={{ color: isDark ? 'white' : '#2d2d2d', fontFamily: '卓特自由体' }}>
+            <h1 className={`text-6xl sm:text-7xl font-bold mb-4 tracking-wider`} style={{ color: isDark ? 'white' : '#2d2d2d', fontFamily: '卓特自由体' }}>
               每天都有新发现
             </h1>
             <p className={`text-sm ${isDark ? 'text-white/90' : 'text-[#2d2d2d]/90'}`}>
@@ -45,10 +45,10 @@ export default function Home() {
           </div>
           
           {/* Platform icons */}
-          <div className="w-full flex justify-center px-12">
-            <div className={`max-w-4xl w-full flex items-center rounded-full px-12 py-4 ${isDark ? 'bg-gray-800/80 border border-gray-700' : 'bg-white/30 backdrop-blur-lg border border-white/50 shadow-lg'}`}>
-              <div className="flex overflow-hidden">
-                <div className="flex gap-6 animate-scroll">
+          <div className="w-full flex justify-center px-4">
+            <div className={`max-w-4xl w-full flex items-center rounded-full px-4 py-4 ${isDark ? 'bg-gray-800/80 border border-gray-700' : 'bg-white/30 backdrop-blur-lg border border-white/50 shadow-lg'}`}>
+              <div className="flex overflow-hidden w-full">
+                <div className="flex gap-4 animate-scroll w-max">
                   {[
                     { icon: '🐾', name: '百度' },
                     { icon: '🎬', name: '好看视频' },
@@ -101,7 +101,7 @@ export default function Home() {
         </div>
         
         {/* Scroll Down Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce-slow">
+        <div className="absolute bottom-8 left-0 right-0 flex justify-center z-10 animate-bounce-slow">
           <div className={`flex flex-col items-center ${isDark ? 'text-white/80' : 'text-gray-600'}`}>
             <span className="text-xs mb-1">向下滚动</span>
             <div className={`w-6 h-8 border ${isDark ? 'border-white/60' : 'border-gray-400'} rounded-full flex justify-center pt-1.5`}>
@@ -113,14 +113,14 @@ export default function Home() {
       
       {/* Creator Plans Section */}
       <section className={`py-24 ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
-        <div className="container mx-auto px-4" style={{ maxWidth: '1280px' }}>
+        <div className="container mx-auto px-4 sm:px-6 max-w-[1280px] flex flex-col items-center">
           <div className="text-center mb-16">
             <h2 className={`text-3xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-800'}`}>主要推荐的产品</h2>
             <p className={`text-base ${isDark ? 'text-gray-300' : 'text-gray-500'}`}>好奇领航计划、金芒计划、百家榜、匠心计划、优选计划</p>
           </div>
           
-          <div className="flex justify-center">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+          <div className="flex justify-center w-full">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
               {/* Card 1 */}
               <div className={`group rounded-2xl p-6 transition-all duration-300 ${isDark ? 'bg-gray-800/80 backdrop-blur-lg border border-gray-700/50 shadow-lg hover:shadow-xl' : 'bg-white/30 backdrop-blur-lg border border-white/50 shadow-[0_0_20px_rgba(0,0,0,0.1)] hover:shadow-[0_0_30px_rgba(0,0,0,0.15)]'}`}>
                 {/* URL bar */}
@@ -138,7 +138,7 @@ export default function Home() {
                 </div>
                 
                 {/* Browser window */}
-                <div className="rounded-xl overflow-hidden shadow-md">
+                <div className="rounded-xl overflow-hidden">
                   {/* Browser header */}
                   <div className={`${isDark ? 'bg-gray-700' : 'bg-gray-100'} px-4 py-2 border-b ${isDark ? 'border-gray-600' : 'border-gray-300'} flex items-center`}>
                     <div className="flex space-x-1.5 mr-3">
@@ -190,7 +190,7 @@ export default function Home() {
                 </div>
                 
                 {/* Browser window */}
-                <div className="rounded-xl overflow-hidden shadow-md">
+                <div className="rounded-xl overflow-hidden">
                   {/* Browser header */}
                   <div className={`${isDark ? 'bg-gray-700' : 'bg-gray-100'} px-4 py-2 border-b ${isDark ? 'border-gray-600' : 'border-gray-300'} flex items-center`}>
                     <div className="flex space-x-1.5 mr-3">
@@ -224,6 +224,58 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+              
+              {/* Card 3 */}
+              <div className={`group rounded-2xl p-6 transition-all duration-300 ${isDark ? 'bg-gray-800/80 backdrop-blur-lg border border-gray-700/50 shadow-lg hover:shadow-xl' : 'bg-white/30 backdrop-blur-lg border border-white/50 shadow-[0_0_20px_rgba(0,0,0,0.1)] hover:shadow-[0_0_30px_rgba(0,0,0,0.15)]'}`}>
+                {/* URL bar */}
+                <div className="flex items-center justify-between mb-6 relative">
+                  <div className="flex items-center">
+                    <div className={`flex items-center ${isDark ? 'bg-gray-700/50' : 'bg-gray-100'} rounded-full px-4 py-2 mr-4`}>
+                      <span className="mr-2">🔒</span>
+                      <span className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>https://www.baidu.com</span>
+                    </div>
+                    <span className={`text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>百度搜索</span>
+                  </div>
+                  <a href="https://www.baidu.com" target="_blank" rel="noopener noreferrer" className="absolute top-0 right-0 w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${isDark ? 'bg-gray-700/50 hover:bg-gray-600/50 border border-gray-600' : 'bg-gray-100 hover:bg-gray-200 border border-gray-300'}">
+                    <span className={`${isDark ? 'text-gray-300' : 'text-gray-700'}`}>↗</span>
+                  </a>
+                </div>
+                
+                {/* Browser window */}
+                <div className="rounded-xl overflow-hidden">
+                  {/* Browser header */}
+                  <div className={`${isDark ? 'bg-gray-700' : 'bg-gray-100'} px-4 py-2 border-b ${isDark ? 'border-gray-600' : 'border-gray-300'} flex items-center`}>
+                    <div className="flex space-x-1.5 mr-3">
+                      <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                      <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                      <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                    </div>
+                    <div className="flex-1"></div>
+                  </div>
+                  
+                  {/* Browser content */}
+                  <div className="relative h-72 bg-gradient-to-br from-blue-500 to-blue-700">
+                    {/* Main text */}
+                    <div className="absolute top-1/3 left-8 max-w-md">
+                      <h3 className="text-2xl font-bold text-white mb-2">百度一下，</h3>
+                      <p className="text-xl text-white/90">你就知道。</p>
+                    </div>
+                    
+                    {/* Images */}
+                    <div className="absolute top-1/2 right-8 transform -translate-y-1/2 flex space-x-2">
+                      <div className="w-16 h-16 rounded-lg overflow-hidden border-2 border-white/30 transform rotate-6">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=baidu%20logo%2C%20search%20engine%2C%20blue%20color&image_size=square" alt="Baidu logo" className="w-full h-full object-cover" />
+                      </div>
+                      <div className="w-16 h-16 rounded-lg overflow-hidden border-2 border-white/30 transform -rotate-3">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=search%20bar%2C%20web%20interface%2C%20modern%20design&image_size=square" alt="Search bar" className="w-full h-full object-cover" />
+                      </div>
+                      <div className="w-16 h-16 rounded-lg overflow-hidden border-2 border-white/30 transform rotate-12">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=search%20results%2C%20web%20page%2C%20information%20display&image_size=square" alt="Search results" className="w-full h-full object-cover" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           
@@ -248,7 +300,7 @@ export default function Home() {
           <div className="absolute bottom-20 left-1/4 w-64 h-64 bg-gradient-to-tr from-blue-400/25 to-teal-300/20 rounded-full blur-3xl"></div>
         </div>
         
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-4 max-w-[1280px] relative z-10 flex flex-col items-center">
           <div className="text-center mb-16">
             <h2 className={`text-3xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-800'}`}>赋能优质内容 提供创作新动力</h2>
             <div className="flex justify-center gap-3 flex-wrap">
@@ -287,7 +339,7 @@ export default function Home() {
       
       {/* Monetization Section */}
       <section className={`py-24 ${isDark ? 'bg-gray-800' : 'bg-gray-50'}`}>
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 max-w-[1280px] flex flex-col items-center">
           <div className="text-center mb-16">
             <h2 className={`text-3xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-800'}`}>六大内容变现手段 全面打通内容商业生态</h2>
             <p className={`text-base ${isDark ? 'text-gray-300' : 'text-gray-500'}`}>流量收益、内容电商、付费专栏、内容营销、付费圈子、赞赏功能</p>
@@ -321,7 +373,7 @@ export default function Home() {
       
       {/* Creators Section */}
       <section className={`py-24 ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 max-w-[1280px] flex flex-col items-center">
           <div className="text-center mb-16">
             <h2 className={`text-3xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>460万+创作者共同选择</h2>
           </div>
@@ -334,7 +386,7 @@ export default function Home() {
               ›
             </button>
             
-            <div className="flex flex-wrap justify-center gap-8 px-16">
+            <div className="flex flex-wrap justify-center gap-8 px-4 sm:px-16">
               {[
                 '水彩仙人',
                 '阿杰Ajee',
@@ -369,7 +421,7 @@ export default function Home() {
       
       {/* Footer */}
       <footer className={`py-10 border-t ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-100'}`}>
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 max-w-[1280px] flex flex-col items-center">
           <div className="flex items-center justify-center gap-8 mb-8">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center">
