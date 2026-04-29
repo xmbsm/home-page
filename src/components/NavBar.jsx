@@ -9,6 +9,7 @@ import NavLink from "./NavLink";
 const isMobile = typeof window !== 'undefined' && window.innerWidth <= 640;
 
 const NavBar = React.memo(() => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const openWindow = useWindowStore(state => state.openWindow);
   const setActiveLocation = useLocationStore(state => state.setActiveLocation);
 
@@ -17,6 +18,7 @@ const NavBar = React.memo(() => {
   const logoPortfolioRef = useRef(null);
   const logoPortfolioPlaceholderRef = useRef(null);
   const settingsButtonRef = useRef(null);
+  const mobileMenuRef = useRef(null);
 
   useEffect(() => {
     if (isMobile) return;
@@ -94,6 +96,21 @@ const NavBar = React.memo(() => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(e.target) && 
+          mobileMenuBtn && !mobileMenuBtn.contains(e.target)) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    
+    if (isMobileMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isMobileMenuOpen]);
   
   const handleNavLinkClick = useCallback((type) => {
     if (!type) return;
@@ -103,6 +120,7 @@ const NavBar = React.memo(() => {
     }
 
     openWindow(type);
+    setIsMobileMenuOpen(false);
   }, [openWindow, setActiveLocation]);
 
   const handleIconClick = useCallback(({ type, action }) => {
@@ -113,6 +131,7 @@ const NavBar = React.memo(() => {
     if (action === 'about') {
       setActiveLocation(locations.about);
     }
+    setIsMobileMenuOpen(false);
   }, [openWindow, setActiveLocation]);
 
   const handleSettingsClick = () => {
@@ -124,6 +143,7 @@ const NavBar = React.memo(() => {
       }
     });
     document.dispatchEvent(event);
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -134,18 +154,14 @@ const NavBar = React.memo(() => {
             <img src="/images/logo.svg" alt="logo" />
             <div className="portfolio-wrapper" ref={wrapperRef}>
               <p className="font-bold portfolio-text">酷设计</p>
-              {!isMobile && (
-                <div className="portfolio-text-container">
-                  <div className="overlay-gif" ref={gifRef}></div>
-                </div>
-              )}
+              <div className="portfolio-text-container">
+                <div className="overlay-gif" ref={gifRef}></div>
+              </div>
             </div>
           </div>
           
-          {!isMobile && (
-            <div className="logo-portfolio-placeholder" ref={logoPortfolioPlaceholderRef}>
-            </div>
-          )}
+          <div className="logo-portfolio-placeholder" ref={logoPortfolioPlaceholderRef}>
+          </div>
 
           <ul>
             {navLinks.map((link) => (
@@ -174,7 +190,61 @@ const NavBar = React.memo(() => {
             </li>
           </ul>
           
+          <button
+            className="mobile-menu-btn p-2"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+              {isMobileMenuOpen ? (
+                <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              ) : (
+                <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              )}
+            </svg>
+          </button>
+          
           <Clock />
+        </div>
+
+        <div className={`mobile-menu ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`} ref={mobileMenuRef}>
+          <div className="flex flex-col gap-2 px-4">
+            {navLinks.map((link) => (
+              <button
+                key={link.id}
+                onClick={() => handleNavLinkClick(link.type)}
+                className="mobile-nav-link text-left px-4 py-3 rounded-lg transition-colors"
+              >
+                <span>{link.name}</span>
+              </button>
+            ))}
+            <div className="border-t border-gray-200 my-2"></div>
+            <button
+              onClick={handleSettingsClick}
+              className="mobile-nav-link text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-2"
+            >
+              <img src="/icons/mode.svg" alt="settings" className="w-5 h-5" />
+              <span>设置</span>
+            </button>
+            {navIcons.map(({ id, img, type, action }) => {
+              const iconNames = {
+                2: '搜索',
+                3: '音乐',
+                4: '关于',
+                6: '壁纸'
+              };
+              return (
+                <button
+                  key={id}
+                  onClick={() => handleIconClick({ type, action })}
+                  className="mobile-nav-link text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-2"
+                >
+                  <img src={img} alt={`icon-${id}`} className="w-5 h-5" />
+                  <span>{iconNames[id] || id}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </nav>
     </>
