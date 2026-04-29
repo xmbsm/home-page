@@ -561,7 +561,7 @@ body {
   }
 
   #home {
-    @apply relative z-0 max-sm:hidden;
+    @apply relative z-0;
 
     ul {
       li {
@@ -737,21 +737,19 @@ body {
     }
 
     #dock {
-      @apply bottom-2;
-      left: 50%;
-      transform: translateX(-50%) scale(1.5);
+      @apply bottom-8 left-0 right-0 flex justify-center;
+      transform: none;
       
       .dock-container {
         @apply px-2 py-1;
         overflow-x: auto;
-        max-width: calc(4 * 56px + 24px);
-        width: max-content;
+        max-width: calc(4 * 56px + 3 * 8px + 16px);
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         -ms-overflow-style: none;
         gap: 8px;
         flex-wrap: nowrap;
-        justify-content: center;
+        justify-content: flex-start;
       }
       
       .dock-container::-webkit-scrollbar {
@@ -759,7 +757,7 @@ body {
       }
       
       .dock-icon {
-        @apply size-12 flex-shrink-0;
+        @apply size-14 flex-shrink-0;
       }
     }
 
@@ -978,6 +976,29 @@ body {
 
     #window-header {
       @apply px-3 py-2 text-xs;
+    }
+
+    #home {
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding: 1rem;
+        gap: 1rem;
+        
+        li {
+          position: relative;
+          margin: 0;
+          
+          img {
+            @apply size-12;
+          }
+          
+          p {
+            @apply text-xs;
+          }
+        }
+      }
     }
   }
 
