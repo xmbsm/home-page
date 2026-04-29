@@ -74,6 +74,7 @@ body {
 
     .portfolio-text {
       @apply text-white transition-colors duration-300;
+      font-size: 0.875rem;
     }
 
     ul {
@@ -149,6 +150,11 @@ body {
     .logo-portfolio-container {
       @apply flex items-center gap-5;
       user-select: none;
+      
+      img {
+        width: 24px;
+        height: 24px;
+      }
       
       /* Make smaller on mobile but keep on left */
       @media (max-width: 640px) {
@@ -737,8 +743,8 @@ body {
     }
 
     #dock {
-      @apply bottom-8 left-0 right-0 flex justify-center;
-      transform: none;
+      @apply absolute bottom-8 left-1/2 -translate-x-1/2 z-50 select-none;
+      transform: translateX(-50%);
       
       .dock-container {
         @apply px-2 py-1;
