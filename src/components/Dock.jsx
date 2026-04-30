@@ -263,8 +263,10 @@ const Dock = React.memo(() => {
                   className='dock-icon'
                   aria-label={name}
                   disabled= {!canOpen}
-                  onClick={() => toggleApp({id, canOpen, action})}
-                  onTouchStart={(e) => e.preventDefault()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleApp({id, canOpen, action});
+                  }}
                   onMouseEnter={(e) => {
                     const position = iconPositions.current[name] || e.currentTarget.getBoundingClientRect();
                     setTooltip({
@@ -284,7 +286,8 @@ const Dock = React.memo(() => {
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    touchAction: 'manipulation'
                   } : {}}
 
                 >

@@ -1111,6 +1111,11 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
       display: none !important;
     }
 
+    .window-root {
+      @apply bg-white rounded-lg overflow-hidden shadow-2xl;
+      z-index: 1000 !important;
+    }
+
     #finder {
       width: 90vw;
       height: 70vh;

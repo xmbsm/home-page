@@ -7,10 +7,20 @@ import Draggable from 'gsap/Draggable';
 const WindowWrapper = (Component, windowKey) => {
 
   const Wrapped = React.memo((props) => {
+    const [isMobile, setIsMobile] = React.useState(false);
     const focusWindow = useWindowStore(state => state.focusWindow);
     const windowState = useWindowStore(state => state.windows[windowKey]);
     const { isOpen, isMaximized, zIndex } = windowState || {};
     const ref = useRef(null);
+
+    React.useEffect(() => {
+      const checkMobile = () => {
+        setIsMobile(window.innerWidth <= 640);
+      };
+      checkMobile();
+      window.addEventListener('resize', checkMobile);
+      return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     // open animation
     useGSAP(() => {
@@ -61,6 +71,13 @@ const WindowWrapper = (Component, windowKey) => {
       // visibility based on open state
       el.style.display = isOpen ? 'block' : 'none';
 
+      // For mobile, add background and ensure it's visible
+      if (isMobile && isOpen) {
+        el.style.backgroundColor = '#ffffff';
+        el.style.position = 'fixed';
+        el.style.zIndex = '2147483647';
+      }
+
       // toggle maximized styles
       if (isMaximized) {
         // save current position/size once
@@ -88,6 +105,7 @@ const WindowWrapper = (Component, windowKey) => {
         el.style.maxWidth = 'none';
         // neutralize any translate from CSS (e.g., -translate-y-1/2)
         el.style.transform = 'none';
+        el.style.backgroundColor = '#ffffff';
       } else {
         // restore to previous size/position if saved
         if (el.dataset.prevTop) {
@@ -102,7 +120,7 @@ const WindowWrapper = (Component, windowKey) => {
           } else if (el.dataset.prevHeight !== 'auto') {
             el.style.height = el.dataset.prevHeight;
           } else {
-            el.style.height = '';
+              el.style.height = '';
           }
           
           // restore position and optional constraints
@@ -136,7 +154,7 @@ const WindowWrapper = (Component, windowKey) => {
         }
         // keep previously dragged top/left as set by Draggable (restored above if existed)
       }
-    }, [isOpen, isMaximized]);
+    }, [isOpen, isMaximized, isMobile]);
 
 
     return (
