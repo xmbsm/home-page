@@ -1,25 +1,41 @@
 import { navIcons, navLinks, locations } from "#constants";
 import useWindowStore from '#store/window';
 import useLocationStore from '#store/location';
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from 'react-dom';
 import Clock from './Clock';
 import NavLink from "./NavLink";
 
-const isMobile = typeof window !== 'undefined' && window.innerWidth <= 640;
-
 const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth <= 640);
   const openWindow = useWindowStore(state => state.openWindow);
   const setActiveLocation = useLocationStore(state => state.setActiveLocation);
+  const menuPortalRef = useRef(null);
 
   const wrapperRef = useRef(null);
   const gifRef = useRef(null);
   const logoPortfolioRef = useRef(null);
   const logoPortfolioPlaceholderRef = useRef(null);
   const settingsButtonRef = useRef(null);
+  const lastToggleTime = useRef(0);
 
   useEffect(() => {
-    if (isMobile) return;
+    const container = document.createElement('div');
+    container.id = 'mobile-menu-portal';
+    document.body.appendChild(container);
+    menuPortalRef.current = container;
+
+    const checkMobile = () => setIsMobile(window.innerWidth <= 640);
+    window.addEventListener('resize', checkMobile);
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      container.remove();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile) return;
     
     Promise.all([
       import('gsap'),
@@ -93,7 +109,7 @@ const NavBar = () => {
         });
       }
     });
-  }, []);
+  }, [isMobile]);
 
   const handleNavLinkClick = (type) => {
     if (!type) return;
@@ -128,6 +144,133 @@ const NavBar = () => {
     document.dispatchEvent(event);
     setIsMobileMenuOpen(false);
   };
+
+  const toggleMobileMenu = useCallback(() => {
+    const now = Date.now();
+    if (now - lastToggleTime.current < 300) return;
+    lastToggleTime.current = now;
+    setIsMobileMenuOpen(prev => !prev);
+  }, []);
+
+  const mobileMenu = isMobile && isMobileMenuOpen ? (
+    <div
+      style={{
+        position: 'fixed',
+        top: '60px',
+        left: '20px',
+        right: '20px',
+        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%)',
+        backdropFilter: 'blur(40px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+        border: '1px solid rgba(255, 255, 255, 0.3)',
+        boxShadow: '0 20px 60px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -1px 0 rgba(255, 255, 255, 0.1)',
+        borderRadius: '24px',
+        padding: '1.25rem',
+        zIndex: 2147483647,
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        maxHeight: 'calc(100vh - 80px)',
+        animation: 'liquidGlassIn 0.3s ease-out',
+      }}
+    >
+      <ul style={{ display: 'flex', flexDirection: 'column', gap: '10px', margin: 0, padding: 0, listStyle: 'none' }}>
+        {navLinks.map((link) => (
+          <li key={link.id}>
+            <button
+              onClick={() => handleNavLinkClick(link.type)}
+              style={{
+                display: 'block',
+                width: '100%',
+                textAlign: 'left',
+                padding: '14px 18px',
+                borderRadius: '16px',
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.08) 100%)',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255, 255, 255, 0.25)',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+                color: 'white',
+                cursor: 'pointer',
+                fontSize: '16px',
+                fontWeight: '500',
+                letterSpacing: '0.3px',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              <span>{link.name}</span>
+            </button>
+          </li>
+        ))}
+        <li style={{ borderTop: '1px solid rgba(255,255,255,0.2)', margin: '6px 0' }}></li>
+        <li>
+          <button
+            onClick={handleSettingsClick}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              width: '100%',
+              textAlign: 'left',
+              padding: '14px 18px',
+              borderRadius: '16px',
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.08) 100%)',
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255, 255, 255, 0.25)',
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+              color: 'white',
+              cursor: 'pointer',
+              fontSize: '16px',
+              fontWeight: '500',
+              letterSpacing: '0.3px',
+              transition: 'all 0.2s ease',
+            }}
+          >
+            <img src="/icons/mode.svg" alt="settings" style={{ width: '22px', height: '22px', filter: 'brightness(1.2)' }} />
+            <span>设置</span>
+          </button>
+        </li>
+        {navIcons.map(({ id, img, type, action }) => {
+          const iconNames = {
+            2: '搜索',
+            3: '音乐',
+            4: '关于',
+            6: '壁纸'
+          };
+          return (
+            <li key={id}>
+              <button
+                onClick={() => handleIconClick({ type, action })}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  width: '100%',
+                  textAlign: 'left',
+                  padding: '14px 18px',
+                  borderRadius: '16px',
+                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.08) 100%)',
+                  backdropFilter: 'blur(10px)',
+                  WebkitBackdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255, 255, 255, 0.25)',
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+                  color: 'white',
+                  cursor: 'pointer',
+                  fontSize: '16px',
+                  fontWeight: '500',
+                  letterSpacing: '0.3px',
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                <img src={img} alt={`icon-${id}`} style={{ width: '22px', height: '22px', filter: 'brightness(1.2)' }} />
+                <span>{iconNames[id] || id}</span>
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  ) : null;
 
   return (
     <>
@@ -176,9 +319,10 @@ const NavBar = () => {
           <Clock />
           
           <button
+            type="button"
             className="mobile-menu-btn p-2"
             aria-label="Toggle menu"
-            onClick={() => setIsMobileMenuOpen(prev => !prev)}
+            onClick={toggleMobileMenu}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
               {isMobileMenuOpen ? (
@@ -189,51 +333,8 @@ const NavBar = () => {
             </svg>
           </button>
         </div>
-
-        <div className="mobile-menu" style={{ display: isMobileMenuOpen ? 'block' : 'none' }}>
-          <ul className="flex flex-col gap-2 px-4 m-0 p-0 list-none">
-            {navLinks.map((link) => (
-              <li key={link.id} className="m-0 p-0">
-                <button
-                  onClick={() => handleNavLinkClick(link.type)}
-                  className="mobile-nav-link text-left px-4 py-3 rounded-lg transition-colors w-full"
-                >
-                  <span>{link.name}</span>
-                </button>
-              </li>
-            ))}
-            <li className="m-0 p-0 border-t border-gray-200 my-2"></li>
-            <li className="m-0 p-0">
-              <button
-                onClick={handleSettingsClick}
-                className="mobile-nav-link text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-2 w-full"
-              >
-                <img src="/icons/mode.svg" alt="settings" className="w-5 h-5" />
-                <span>设置</span>
-              </button>
-            </li>
-            {navIcons.map(({ id, img, type, action }) => {
-              const iconNames = {
-                2: '搜索',
-                3: '音乐',
-                4: '关于',
-                6: '壁纸'
-              };
-              return (
-                <li key={id} className="m-0 p-0">
-                  <button
-                    onClick={() => handleIconClick({ type, action })}
-                    className="mobile-nav-link text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-2 w-full"
-                  >
-                    <img src={img} alt={`icon-${id}`} className="w-5 h-5" />
-                    <span>{iconNames[id] || id}</span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
       </nav>
+      {menuPortalRef.current && createPortal(mobileMenu, menuPortalRef.current)}
     </>
   );
 }
