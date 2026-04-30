@@ -997,30 +997,30 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
   /* Mobile responsive styles */
   @media (max-width: 640px) {
     nav {
-      @apply px-3 py-2 flex flex-row justify-between items-center;
+      @apply px-3 py-1 flex flex-row justify-between items-center h-10;
       
       > div:nth-child(1) {
         display: flex !important;
         align-items: center !important;
-        gap: 8px !important;
+        gap: 6px !important;
         flex: 1 !important;
       }
       
       > div:nth-child(2) {
         display: flex !important;
         align-items: center !important;
-        gap: 8px !important;
+        gap: 4px !important;
       }
       
       .logo-portfolio-container {
-        @apply gap-2;
+        @apply gap-1.5;
         
         img {
           @apply w-6 h-6;
         }
         
         .portfolio-text {
-          @apply text-sm;
+          @apply text-base;
         }
 
         .portfolio-text-container {
