@@ -73,14 +73,14 @@ const dockApps = [
   },
   {
     id: "terminal",
-    name: "技能", // was "Terminal"
-    icon: "terminal.webp",
+    name: "小酷字体",
+    icon: "mfzt.png",
     canOpen: true,
   },
   {
     id: "vscode",
-    name: "VS Code",
-    icon: "code2.webp",
+    name: "LOGO下载",
+    icon: "logoxz.png",
     canOpen: true,
   },
   {
