@@ -190,6 +190,8 @@ const NavBar = React.memo(() => {
             </li>
           </ul>
           
+          <Clock />
+          
           <button
             className="mobile-menu-btn p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -203,8 +205,6 @@ const NavBar = React.memo(() => {
               )}
             </svg>
           </button>
-          
-          <Clock />
         </div>
 
         <div className={`mobile-menu ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`} ref={mobileMenuRef}>

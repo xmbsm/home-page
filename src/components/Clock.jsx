@@ -1,30 +1,48 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const isMobile = typeof window !== 'undefined' && window.innerWidth <= 640;
+const isMobileInitial = typeof window !== 'undefined' && window.innerWidth <= 640;
 
 const Clock = React.memo(() => {
-  const [time, setTime] = useState(() => getTimeString());
+  const [time, setTime] = useState(() => getTimeString(isMobileInitial));
+  const [isMobile, setIsMobile] = useState(isMobileInitial);
   const dateTimeRef = useRef(null);
   const dateTimePlaceholderRef = useRef(null);
 
-  function getTimeString() {
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = typeof window !== 'undefined' && window.innerWidth <= 640;
+      setIsMobile(mobile);
+    };
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  function getTimeString(mobile) {
     const now = new Date();
     const days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
     const hours = now.getHours();
     const minutes = now.getMinutes().toString().padStart(2, '0');
     const period = hours < 6 ? '凌晨' : hours < 12 ? '上午' : hours < 18 ? '下午' : '晚上';
     const hour12 = hours % 12 || 12;
+    
+    if (mobile) {
+      return `${days[now.getDay()]} ${period}${hour12}:${minutes}`;
+    }
+    
     return `${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日 ${days[now.getDay()]} ${period}${hour12}:${minutes}`;
   }
 
   useEffect(() => {
+    // Update time immediately when isMobile changes
+    setTime(getTimeString(isMobile));
+    
     // Update time every 60 seconds
     const intervalId = setInterval(() => {
-      setTime(getTimeString());
+      setTime(getTimeString(isMobile));
     }, 60000); // 60 seconds
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     // Skip drag functionality on mobile

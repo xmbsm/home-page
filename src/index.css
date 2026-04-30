@@ -997,7 +997,20 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
   /* Mobile responsive styles */
   @media (max-width: 640px) {
     nav {
-      @apply px-3 py-2;
+      @apply px-3 py-2 flex flex-row justify-between items-center;
+      
+      > div:nth-child(1) {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        flex: 1 !important;
+      }
+      
+      > div:nth-child(2) {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+      }
       
       .logo-portfolio-container {
         @apply gap-2;
@@ -1008,6 +1021,28 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
         
         .portfolio-text {
           @apply text-sm;
+        }
+
+        .portfolio-text-container {
+          position: absolute !important;
+          left: auto !important;
+          right: -60px !important;
+          top: 50% !important;
+          transform: translateY(-50%) !important;
+          width: 60px !important;
+          height: 60px !important;
+        }
+
+        .overlay-gif {
+          position: absolute !important;
+          left: 0 !important;
+          right: auto !important;
+          bottom: auto !important;
+          top: 50% !important;
+          transform: translateY(-50%) !important;
+          width: 60px !important;
+          height: 60px !important;
+          background-position: center center !important;
         }
       }
       

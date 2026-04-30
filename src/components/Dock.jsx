@@ -176,15 +176,15 @@ const Dock = React.memo(() => {
           top: 'auto !important',
           transform: 'translateX(-50%) !important',
           zIndex: 9999,
-          width: '248px',
-          maxWidth: '248px',
-          minWidth: '248px',
-          padding: '4px',
+          width: '312px',
+          maxWidth: '312px',
+          minWidth: '312px',
+          padding: '6px',
           margin: '0',
           background: 'rgba(255, 255, 255, 0.1)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          borderRadius: '16px',
+          borderRadius: '20px',
           border: '1px solid rgba(255, 255, 255, 0.2)',
           overflowX: 'auto',
           overflowY: 'hidden',
@@ -195,7 +195,7 @@ const Dock = React.memo(() => {
           justifyContent: 'flex-start',
           alignItems: 'center',
           flexWrap: 'nowrap',
-          gap: '6px',
+          gap: '8px',
           scrollbarWidth: 'none',
           msOverflowStyle: 'none'
         } : {}}
@@ -249,8 +249,8 @@ const Dock = React.memo(() => {
                 key={id}
                 className='relative flex justify-center'
                 style={isMobile ? {
-                  width: '56px',
-                  height: '56px',
+                  width: '70px',
+                  height: '70px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -275,8 +275,8 @@ const Dock = React.memo(() => {
                     });
                   }}
                   style={isMobile ? {
-                    width: '56px',
-                    height: '56px',
+                    width: '70px',
+                    height: '70px',
                     padding: '0',
                     margin: '0',
                     background: 'transparent',
@@ -294,8 +294,8 @@ const Dock = React.memo(() => {
                     loading='lazy'
                     className={!canOpen ? 'opacity-60' : ''}
                     style={isMobile ? {
-                      width: '56px',
-                      height: '56px',
+                      width: '70px',
+                      height: '70px',
                       objectFit: 'cover',
                       objectPosition: 'center'
                     } : {}}
