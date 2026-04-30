@@ -17,19 +17,6 @@ const NavBar = () => {
   const logoPortfolioRef = useRef(null);
   const logoPortfolioPlaceholderRef = useRef(null);
   const settingsButtonRef = useRef(null);
-  const mobileMenuBtnRef = useRef(null);
-
-  useEffect(() => {
-    const handleMenuClick = () => {
-      setIsMobileMenuOpen(prev => !prev);
-    };
-    
-    const btn = mobileMenuBtnRef.current;
-    if (btn) {
-      btn.addEventListener('click', handleMenuClick);
-      return () => btn.removeEventListener('click', handleMenuClick);
-    }
-  }, []);
 
   useEffect(() => {
     if (isMobile) return;
@@ -189,9 +176,9 @@ const NavBar = () => {
           <Clock />
           
           <button
-            ref={mobileMenuBtnRef}
             className="mobile-menu-btn p-2"
             aria-label="Toggle menu"
+            onClick={() => setIsMobileMenuOpen(prev => !prev)}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
               {isMobileMenuOpen ? (

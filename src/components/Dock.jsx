@@ -257,7 +257,7 @@ const Dock = React.memo(() => {
                     e.stopPropagation();
                     toggleApp({id, canOpen, action});
                   }}
-                  onMouseEnter={(e) => {
+                  onMouseEnter={isMobile ? undefined : (e) => {
                     const position = iconPositions.current[name] || e.currentTarget.getBoundingClientRect();
                     setTooltip({
                       show: true,
@@ -299,7 +299,7 @@ const Dock = React.memo(() => {
           </div>
         </div>
       </section>
-      {tooltip.show && (
+      {!isMobile && tooltip.show && (
         <div
           style={{
             position: 'fixed',
