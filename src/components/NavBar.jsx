@@ -35,7 +35,7 @@ const NavBar = () => {
   }, []);
 
   useEffect(() => {
-    if (!isMobile) return;
+    const isMobileMode = window.innerWidth <= 640;
     
     Promise.all([
       import('gsap'),
@@ -56,6 +56,8 @@ const NavBar = () => {
       if (logoPortfolioPlaceholder) {
         gsap.set(logoPortfolioPlaceholder, { opacity: 0 });
       }
+
+      if (isMobileMode) return;
 
       const enter = () => {
         gsap.to(gif, {
@@ -109,7 +111,7 @@ const NavBar = () => {
         });
       }
     });
-  }, [isMobile]);
+  }, []);
 
   const handleNavLinkClick = (type) => {
     if (!type) return;
