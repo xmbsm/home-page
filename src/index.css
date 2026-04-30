@@ -374,6 +374,7 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
         animation: slideDown 0.2s ease-out;
         overflow-y: auto !important;
         overflow-x: hidden !important;
+        pointer-events: auto !important;
       }
 
       .mobile-menu > ul {
@@ -386,12 +387,14 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
         min-height: 400px !important;
         list-style: none !important;
         width: 100% !important;
+        pointer-events: auto !important;
       }
       
       .mobile-menu > ul > li {
         margin: 0 !important;
         padding: 0 !important;
         width: 100% !important;
+        pointer-events: auto !important;
       }
 
       .mobile-menu button {
@@ -403,6 +406,7 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
       border: none;
       background: transparent;
       cursor: pointer;
+      pointer-events: auto;
       transition: background 0.2s ease;
       min-height: 44px;
 

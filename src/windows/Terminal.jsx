@@ -1,10 +1,13 @@
 import { WindowControls } from '#components'
 import WindowWrapper from '#hoc/WindowWrapper'
 import useWindowStore from '#store/window'
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 
 const Terminal = () => {
   const { focusWindow, windows } = useWindowStore();
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+  
   const isFocused = (() => {
     const openWindows = Object.values(windows).filter(w => w.isOpen);
     const maxZ = openWindows.reduce((m, w) => Math.max(m, w.zIndex), 0);
@@ -15,6 +18,16 @@ const Terminal = () => {
   const openUrl = () => {
     window.open('https://ziti.kusheji.com/', '_blank')
   }
+
+  const handleIframeLoad = useCallback(() => {
+    setIsLoading(false);
+    setHasError(false);
+  }, []);
+
+  const handleIframeError = useCallback(() => {
+    setIsLoading(false);
+    setHasError(true);
+  }, []);
 
   return (
     <>
@@ -72,12 +85,48 @@ const Terminal = () => {
               inset: 0,
               background: 'transparent',
               cursor: 'pointer',
+              zIndex: 10,
             }}
           />
+        )}
+        {(isLoading || hasError) && (
+          <div 
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: '#1e1e1e',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 5,
+            }}
+          >
+            {hasError ? (
+              <div className="text-center text-white p-4">
+                <p className="text-lg mb-2">加载失败</p>
+                <button 
+                  onClick={() => {
+                    setIsLoading(true);
+                    setHasError(false);
+                  }}
+                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                >
+                  重试
+                </button>
+              </div>
+            ) : (
+              <div className="text-white">
+                <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+                <p>加载中...</p>
+              </div>
+            )}
+          </div>
         )}
         <iframe
           src='https://ziti.kusheji.com/'
           title='小酷字体'
+          onLoad={handleIframeLoad}
+          onError={handleIframeError}
           style={{
             width: '100%',
             height: '100%',
