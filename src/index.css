@@ -1118,51 +1118,11 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
     #finder {
       width: 90vw;
       height: 70vh;
-      
-      .sidebar {
-        @apply w-24 px-2;
-        
-        h3 {
-          @apply text-xs;
-        }
-        
-        li {
-          @apply px-2 py-1;
-          
-          p {
-            @apply text-xs;
-          }
-        }
-      }
-      
-      .content {
-        @apply p-3;
-        
-        li {
-          @apply w-20;
-          
-          img {
-            @apply size-12;
-          }
-          
-          p {
-            @apply text-xs;
-          }
-        }
-      }
     }
 
     #contact {
       width: 90vw;
       height: 60vh;
-      
-      ul {
-        @apply flex-col;
-        
-        li {
-          @apply w-full;
-        }
-      }
     }
 
     #resume {
@@ -1178,93 +1138,21 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
     #safari {
       width: 90vw;
       height: 70vh;
-      
-      .blog {
-        @apply p-4;
-        
-        h2 {
-          @apply text-lg mb-5;
-        }
-        
-        .blog-post {
-          @apply flex flex-col;
-          
-          img {
-            @apply h-32;
-          }
-          
-          .content {
-            @apply mt-3;
-          }
-        }
-      }
     }
 
     #terminal {
       width: 90vw;
       height: 70vh;
-      
-      .techstack {
-        @apply p-3;
-        
-        .label {
-          @apply ms-3 mt-4;
-        }
-        
-        li {
-          @apply flex flex-wrap;
-          
-          h3 {
-            @apply w-auto;
-          }
-        }
-      }
     }
 
     #photos {
       width: 90vw;
       height: 70vh;
-      
-      .sidebar {
-        @apply w-16 p-2;
-        
-        li p {
-          @apply hidden;
-        }
-      }
-      
-      .gallery ul {
-        column-count: 2;
-      }
     }
 
     #music {
       width: 90vw;
       height: 70vh;
-      
-      .sidebar {
-        @apply w-20 p-2;
-        
-        h2 {
-          @apply text-xs;
-        }
-        
-        li {
-          @apply px-1 py-1;
-          
-          p {
-            @apply text-xs truncate;
-          }
-        }
-      }
-      
-      .player {
-        @apply p-4;
-        
-        .cover img {
-          @apply h-40;
-        }
-      }
     }
 
     #vscode {
@@ -1275,33 +1163,14 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
     #game {
       width: 90vw;
       height: 70vh;
-      
-      .sidebar {
-        @apply w-20 p-2;
-        
-        h3 {
-          @apply text-xs;
-        }
-        
-        li {
-          @apply px-1 py-1;
-          
-          p {
-            @apply text-xs;
-          }
-        }
-      }
-      
-      .content {
-        @apply p-3;
-        
-        img {
-          @apply h-32;
-        }
-      }
     }
 
     #ner {
+      width: 90vw;
+      height: 70vh;
+    }
+
+    #trash {
       width: 90vw;
       height: 70vh;
     }

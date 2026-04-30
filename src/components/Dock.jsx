@@ -4,7 +4,7 @@ import useWindowStore from '#store/window';
 import useLocationStore from '#store/location';
 
 const Dock = React.memo(() => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth <= 640);
   const dockRef = useRef(null);
   const containerRef = useRef(null);
   const [tooltip, setTooltip] = useState({ show: false, text: '', x: 0, y: 0 });

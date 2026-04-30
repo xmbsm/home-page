@@ -18,6 +18,7 @@ const WindowWrapper = (Component, windowKey) => {
     const [isMobile, setIsMobile] = useReactState(() => {
       return typeof window !== 'undefined' && window.innerWidth <= 640;
     });
+    const [isPortalReady, setIsPortalReady] = useReactState(false);
 
     useReactEffect(() => {
       // Create portal container for mobile
@@ -26,6 +27,9 @@ const WindowWrapper = (Component, windowKey) => {
       container.dataset.portal = 'true';
       document.body.appendChild(container);
       portalRef.current = container;
+      
+      // Force re-render so portal can be created
+      setIsPortalReady(true);
       
       const checkMobile = () => {
         setIsMobile(window.innerWidth <= 640);
@@ -90,7 +94,7 @@ const WindowWrapper = (Component, windowKey) => {
       const el = ref.current;
       if(!el) return;
 
-      // For mobile, skip - JSX handles everything
+      // For mobile, hide desktop element (it should never show)
       if (isMobile) {
         return;
       }
@@ -185,25 +189,27 @@ const WindowWrapper = (Component, windowKey) => {
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: 99999,
-          backgroundColor: 'rgba(0,0,0,0.5)',
-          padding: '16px',
+          backgroundColor: 'transparent',
+          padding: isMaximized ? '0' : '16px',
           margin: '0',
         }}
         onClick={(e) => e.stopPropagation()}>
-          <div style={{
-            width: 'min(90vw, 600px)',
-            height: '70vh',
-            backgroundColor: '#ffffff',
-            borderRadius: '16px',
-            overflow: 'hidden',
-            boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
-          }}>
+          <div 
+            id={windowKey}
+            style={{
+              width: isMaximized ? '100vw' : 'min(90vw, 600px)',
+              height: isMaximized ? '100vh' : '70vh',
+              backgroundColor: '#ffffff',
+              borderRadius: isMaximized ? '0' : '16px',
+              overflow: 'hidden',
+              boxShadow: isMaximized ? 'none' : '0 20px 60px rgba(0,0,0,0.3)',
+            }}>
             <Component {...props} />
           </div>
       </section>
     ) : null;
 
-    const desktopContent = (
+    const desktopContent = !isMobile ? (
       <section 
         id={windowKey} 
         ref={ref} 
@@ -212,12 +218,12 @@ const WindowWrapper = (Component, windowKey) => {
         onClick={() => focusWindow(windowKey)}>
           <Component {...props} />
       </section>
-    );
+    ) : null;
 
     return (
       <>
         {desktopContent}
-        {isMobile && portalRef.current && createPortal(mobileContent, portalRef.current)}
+        {isMobile && isPortalReady && createPortal(mobileContent, portalRef.current)}
       </>
     )
   });
