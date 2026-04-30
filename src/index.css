@@ -1024,48 +1024,10 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
       }
     }
 
-    #dock {
-      position: absolute;
-      bottom: 24px;
-      left: 30px;
-      right: 30px;
-      z-index: 50;
-      user-select: none;
-      
-      .dock-scroll-container {
-        width: 100%;
-        max-width: 248px;
-        margin: 0 auto;
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-      }
-      
-      .dock-scroll-container::-webkit-scrollbar {
-        display: none;
-      }
-      
-      .dock-container {
-        display: flex;
-        align-items: flex-end;
-        justify-content: flex-start;
-        gap: 6px;
-        padding: 4px;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(20px);
-        border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        flex-wrap: nowrap;
-        min-width: fit-content;
-      }
-      
-      .dock-icon {
-        width: 56px;
-        height: 56px;
-        flex-shrink: 0;
-      }
+
+
+    .mobile-dock-no-scrollbar::-webkit-scrollbar {
+      display: none !important;
     }
 
     #finder {

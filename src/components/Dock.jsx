@@ -13,7 +13,7 @@ const Dock = React.memo(() => {
   useEffect(() => {
     const dock = dockRef.current;
     if (!dock) return;
-    
+
     const icons = dock.querySelectorAll('.dock-icon');
     icons.forEach((icon) => {
       const rect = icon.getBoundingClientRect();
@@ -29,7 +29,7 @@ const Dock = React.memo(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 640);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -43,7 +43,7 @@ const Dock = React.memo(() => {
   useEffect(() => {
     const dock  = dockRef.current;
     if (!dock || isMobile) return () => {};
-    
+
     Promise.all([
       import('gsap'),
       import('@gsap/react')
@@ -99,7 +99,7 @@ const Dock = React.memo(() => {
 
   useEffect(() => {
     if (!isMobile || !containerRef.current) return;
-    
+
     const container = containerRef.current;
     let touchStartX = 0;
     let touchEndX = 0;
@@ -165,22 +165,101 @@ const Dock = React.memo(() => {
 
   return (
     <>
-      <section id='dock'>
-        <div 
+      <section 
+        id='dock'
+        className={isMobile ? 'mobile-dock-no-scrollbar' : ''}
+        style={isMobile ? {
+          position: 'fixed !important',
+          bottom: '24px !important',
+          left: '50% !important',
+          right: 'auto !important',
+          top: 'auto !important',
+          transform: 'translateX(-50%) !important',
+          zIndex: 9999,
+          width: '248px',
+          maxWidth: '248px',
+          minWidth: '248px',
+          padding: '4px',
+          margin: '0',
+          background: 'rgba(255, 255, 255, 0.1)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          borderRadius: '16px',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          overflowX: 'auto',
+          overflowY: 'hidden',
+          WebkitOverflowScrolling: 'touch',
+          scrollSnapType: 'x mandatory',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+          flexWrap: 'nowrap',
+          gap: '6px',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
+        } : {}}
+      >
+        <div
           ref={containerRef}
           className='dock-scroll-container'
+          style={isMobile ? {
+            width: 'auto',
+            minWidth: 'fit-content',
+            padding: '0',
+            margin: '0',
+            overflow: 'visible',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            flexWrap: 'nowrap',
+            gap: '6px',
+            flex: 'none',
+            background: 'transparent',
+            borderRadius: '0',
+            border: 'none'
+          } : {}}
         >
-          <div 
-            ref={dockRef} 
+          <div
+            ref={dockRef}
             className='dock-container'
+            style={isMobile ? {
+              width: 'auto',
+              minWidth: 'fit-content',
+              padding: '0',
+              margin: '0',
+              overflow: 'visible',
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+              flexWrap: 'nowrap',
+              gap: '6px',
+              flex: 'none',
+              background: 'transparent',
+              borderRadius: '0',
+              border: 'none',
+              backdropFilter: 'none',
+              transition: 'none'
+            } : {}}
           >
             {dockApps.map(({id, name, icon, canOpen, action}) => (
-              <div 
-                key={id} 
+              <div
+                key={id}
                 className='relative flex justify-center'
+                style={isMobile ? {
+                  width: '56px',
+                  height: '56px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: '0',
+                  scrollSnapAlign: 'start'
+                } : {}}
               >
-                <button 
-                  type='button' 
+                <button
+                  type='button'
                   className='dock-icon'
                   aria-label={name}
                   disabled= {!canOpen}
@@ -188,20 +267,38 @@ const Dock = React.memo(() => {
                   onTouchStart={(e) => e.preventDefault()}
                   onMouseEnter={(e) => {
                     const position = iconPositions.current[name] || e.currentTarget.getBoundingClientRect();
-                    setTooltip({ 
-                      show: true, 
-                      text: name, 
-                      x: position.left + (position.width || e.currentTarget.offsetWidth) / 2, 
-                      y: position.top - 28 
+                    setTooltip({
+                      show: true,
+                      text: name,
+                      x: position.left + (position.width || e.currentTarget.offsetWidth) / 2,
+                      y: position.top - 28
                     });
                   }}
-                  
+                  style={isMobile ? {
+                    width: '56px',
+                    height: '56px',
+                    padding: '0',
+                    margin: '0',
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  } : {}}
+
                 >
-                  <img 
+                  <img
                     src={`/images/${icon}`}
                     alt={name}
                     loading='lazy'
-                    className={canOpen ? '' : 'opacity-60'}
+                    className={!canOpen ? 'opacity-60' : ''}
+                    style={isMobile ? {
+                      width: '56px',
+                      height: '56px',
+                      objectFit: 'cover',
+                      objectPosition: 'center'
+                    } : {}}
                   />
                 </button>
               </div>
@@ -210,7 +307,7 @@ const Dock = React.memo(() => {
         </div>
       </section>
       {tooltip.show && (
-        <div 
+        <div
           style={{
             position: 'fixed',
             left: tooltip.x,
