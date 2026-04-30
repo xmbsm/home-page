@@ -7,11 +7,15 @@ import Draggable from 'gsap/Draggable';
 const WindowWrapper = (Component, windowKey) => {
 
   const Wrapped = React.memo((props) => {
-    const [isMobile, setIsMobile] = React.useState(false);
     const focusWindow = useWindowStore(state => state.focusWindow);
     const windowState = useWindowStore(state => state.windows[windowKey]);
     const { isOpen, isMaximized, zIndex } = windowState || {};
     const ref = useRef(null);
+    
+    // Initialize state with correct value from the start
+    const [isMobile, setIsMobile] = React.useState(() => {
+      return typeof window !== 'undefined' && window.innerWidth <= 640;
+    });
 
     React.useEffect(() => {
       const checkMobile = () => {
@@ -27,11 +31,17 @@ const WindowWrapper = (Component, windowKey) => {
       const el = ref.current;
       if (!el || !isOpen) return;
 
+      // For mobile, skip animation - we handle visibility in useLayoutEffect
+      if (isMobile) {
+        return;
+      }
+
+      // Desktop version
       el.style.display = 'block';
 
       gsap.fromTo(el, {
         scale: 0.8,
-        opacity:0, 
+        opacity: 0, 
         y: 40,
       },{
         scale: 1,
@@ -40,7 +50,7 @@ const WindowWrapper = (Component, windowKey) => {
         duration: 0.4,
         ease: 'power3.out'
       })
-    }, [isOpen]);
+    }, [isOpen, isMobile]);
 
     // draggable handling (disable when maximized or closed)
     useGSAP(() => {
@@ -68,15 +78,26 @@ const WindowWrapper = (Component, windowKey) => {
       const el = ref.current;
       if(!el) return;
 
-      // visibility based on open state
-      el.style.display = isOpen ? 'block' : 'none';
-
-      // For mobile, add background and ensure it's visible
-      if (isMobile && isOpen) {
-        el.style.backgroundColor = '#ffffff';
-        el.style.position = 'fixed';
-        el.style.zIndex = '2147483647';
+      // For mobile, handle window opening directly
+      if (isMobile) {
+        if (isOpen) {
+          el.style.display = 'block';
+          el.style.backgroundColor = '#ffffff';
+          el.style.position = 'fixed';
+          el.style.zIndex = '2147483647';
+          el.style.top = '50%';
+          el.style.left = '50%';
+          el.style.transform = 'translate(-50%, -50%)';
+          el.style.width = '90vw';
+          el.style.height = '70vh';
+        } else {
+          el.style.display = 'none';
+        }
+        return;
       }
+
+      // Desktop version - visibility based on open state
+      el.style.display = isOpen ? 'block' : 'none';
 
       // toggle maximized styles
       if (isMaximized) {
@@ -105,7 +126,6 @@ const WindowWrapper = (Component, windowKey) => {
         el.style.maxWidth = 'none';
         // neutralize any translate from CSS (e.g., -translate-y-1/2)
         el.style.transform = 'none';
-        el.style.backgroundColor = '#ffffff';
       } else {
         // restore to previous size/position if saved
         if (el.dataset.prevTop) {
@@ -161,7 +181,11 @@ const WindowWrapper = (Component, windowKey) => {
       <section 
         id={windowKey} 
         ref={ref} 
-        style={{zIndex}} 
+        style={{
+          zIndex: isMobile && isOpen ? 2147483647 : zIndex,
+          backgroundColor: isMobile && isOpen ? '#ffffff' : undefined,
+          position: isMobile && isOpen ? 'fixed' : 'absolute'
+        }} 
         className='absolute window-root'
         onClick={() => focusWindow(windowKey)}>
           <Component {...props} />

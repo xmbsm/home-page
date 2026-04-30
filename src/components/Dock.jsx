@@ -149,19 +149,9 @@ const Dock = React.memo(() => {
       return;
     }
 
-    const win = windows[app.id];
-
-    if (!win) {
-      console.log(`Window not found for app: ${app.id}`);
-      return;
-    }
-
-    if (win.isOpen) {
-      closeWindow(app.id);
-    } else {
-      openWindow(app.id);
-    }
-  }, [openWindow, closeWindow, windows, setActiveLocation]);
+    // For other windows, just open them
+    openWindow(app.id);
+  }, [openWindow, setActiveLocation]);
 
   return (
     <>
