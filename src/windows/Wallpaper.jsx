@@ -68,4 +68,5 @@ const Wallpaper = () => {
 
 const WallpaperWindow = WindowWrapper(Wallpaper, 'wallpaper')
 
+export { Wallpaper }
 export default WallpaperWindow

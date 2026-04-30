@@ -83,4 +83,5 @@ const Finder = () => {
 
 const FinderWindow = WindowWrapper(Finder, "finder");
 
+export { Finder }
 export default FinderWindow;

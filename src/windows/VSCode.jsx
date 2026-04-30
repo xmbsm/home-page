@@ -101,4 +101,7 @@ const VSCode = () => {
   )
 }
 
-export default WindowWrapper(VSCode, 'vscode', 'VS Code Web IDE')
+const VSCodeWindow = WindowWrapper(VSCode, 'vscode', 'VS Code Web IDE')
+
+export { VSCode }
+export default VSCodeWindow

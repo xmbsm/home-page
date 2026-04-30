@@ -142,4 +142,5 @@ const Terminal = () => {
 
 const TerminalWindow = WindowWrapper(Terminal, 'terminal')
 
+export { Terminal }
 export default TerminalWindow

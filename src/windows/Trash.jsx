@@ -48,4 +48,5 @@ const Trash = () => {
 
 const TrashWindow = WindowWrapper(Trash, 'trash')
 
+export { Trash }
 export default TrashWindow

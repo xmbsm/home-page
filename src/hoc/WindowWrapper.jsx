@@ -1,6 +1,7 @@
 import useWindowStore from '#store/window'
 import { useGSAP } from '@gsap/react';
-import React, { useLayoutEffect, useRef } from 'react'
+import React, { useLayoutEffect, useRef, useState as useReactState, useEffect as useReactEffect } from 'react'
+import { createPortal } from 'react-dom'
 import gsap from 'gsap';
 import Draggable from 'gsap/Draggable';
 
@@ -11,19 +12,30 @@ const WindowWrapper = (Component, windowKey) => {
     const windowState = useWindowStore(state => state.windows[windowKey]);
     const { isOpen, isMaximized, zIndex } = windowState || {};
     const ref = useRef(null);
+    const portalRef = useRef(null);
     
     // Initialize state with correct value from the start
-    const [isMobile, setIsMobile] = React.useState(() => {
+    const [isMobile, setIsMobile] = useReactState(() => {
       return typeof window !== 'undefined' && window.innerWidth <= 640;
     });
 
-    React.useEffect(() => {
+    useReactEffect(() => {
+      // Create portal container for mobile
+      const container = document.createElement('div');
+      container.id = `mobile-portal-${windowKey}`;
+      container.dataset.portal = 'true';
+      document.body.appendChild(container);
+      portalRef.current = container;
+      
       const checkMobile = () => {
         setIsMobile(window.innerWidth <= 640);
       };
       checkMobile();
       window.addEventListener('resize', checkMobile);
-      return () => window.removeEventListener('resize', checkMobile);
+      return () => {
+        window.removeEventListener('resize', checkMobile);
+        container.remove();
+      };
     }, []);
 
     // open animation
@@ -52,10 +64,10 @@ const WindowWrapper = (Component, windowKey) => {
       })
     }, [isOpen, isMobile]);
 
-    // draggable handling (disable when maximized or closed)
+    // draggable handling (disable when maximized or closed or on mobile)
     useGSAP(() => {
       const el = ref.current;
-      if (!el) return;
+      if (!el || isMobile) return;
 
       if (!isOpen || isMaximized) {
         // ensure any previous Draggable is killed
@@ -67,32 +79,19 @@ const WindowWrapper = (Component, windowKey) => {
         onPress: () => focusWindow(windowKey),
         trigger: el.querySelector('.window-drag-handle'),
         ignore: "input[type='range'], button, .sliders",
-        cursor: "grab",  // More visible on white backgrounds
+        cursor: "grab",
         activeCursor: "grabbing"
       })
 
       return () => instance.kill();
-    }, [isOpen, isMaximized, focusWindow]);
+    }, [isOpen, isMaximized, focusWindow, isMobile]);
 
     useLayoutEffect(() => {
       const el = ref.current;
       if(!el) return;
 
-      // For mobile, handle window opening directly
+      // For mobile, skip - JSX handles everything
       if (isMobile) {
-        if (isOpen) {
-          el.style.display = 'block';
-          el.style.backgroundColor = '#ffffff';
-          el.style.position = 'fixed';
-          el.style.zIndex = '2147483647';
-          el.style.top = '50%';
-          el.style.left = '50%';
-          el.style.transform = 'translate(-50%, -50%)';
-          el.style.width = '90vw';
-          el.style.height = '70vh';
-        } else {
-          el.style.display = 'none';
-        }
         return;
       }
 
@@ -177,19 +176,49 @@ const WindowWrapper = (Component, windowKey) => {
     }, [isOpen, isMaximized, isMobile]);
 
 
-    return (
+    const mobileContent = isMobile ? (
+      <section 
+        style={{
+          display: isOpen ? 'flex' : 'none',
+          position: 'fixed',
+          inset: '0',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 99999,
+          backgroundColor: 'rgba(0,0,0,0.5)',
+          padding: '16px',
+          margin: '0',
+        }}
+        onClick={(e) => e.stopPropagation()}>
+          <div style={{
+            width: 'min(90vw, 600px)',
+            height: '70vh',
+            backgroundColor: '#ffffff',
+            borderRadius: '16px',
+            overflow: 'hidden',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
+          }}>
+            <Component {...props} />
+          </div>
+      </section>
+    ) : null;
+
+    const desktopContent = (
       <section 
         id={windowKey} 
         ref={ref} 
-        style={{
-          zIndex: isMobile && isOpen ? 2147483647 : zIndex,
-          backgroundColor: isMobile && isOpen ? '#ffffff' : undefined,
-          position: isMobile && isOpen ? 'fixed' : 'absolute'
-        }} 
-        className='absolute window-root'
+        style={{ zIndex: zIndex }}
+        className='window-root'
         onClick={() => focusWindow(windowKey)}>
           <Component {...props} />
       </section>
+    );
+
+    return (
+      <>
+        {desktopContent}
+        {isMobile && portalRef.current && createPortal(mobileContent, portalRef.current)}
+      </>
     )
   });
 

@@ -262,4 +262,7 @@ const Game = () => {
   )
 }
 
-export default WindowWrapper(Game, 'game', 'Games')
+const GameWindow = WindowWrapper(Game, 'game')
+
+export { Game }
+export default GameWindow

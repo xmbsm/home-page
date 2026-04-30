@@ -1112,64 +1112,7 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
     }
 
     .window-root {
-      @apply bg-white rounded-lg overflow-hidden shadow-2xl;
       z-index: 2147483647 !important;
-      display: none !important;
-    }
-
-    .window-root[style*="display: block"],
-    .window-root[style*="display:block"] {
-      display: block !important;
-    }
-
-    #finder,
-    #contact,
-    #resume,
-    #safari,
-    #photos,
-    #terminal,
-    #vscode,
-    #txtfile,
-    #imgfile,
-    #music,
-    #game,
-    #wallpaper {
-      width: 90vw !important;
-      height: 70vh !important;
-      position: fixed !important;
-      top: 50% !important;
-      left: 50% !important;
-      transform: translate(-50%, -50%) !important;
-      background-color: #ffffff !important;
-      z-index: 2147483647 !important;
-      display: none !important;
-    }
-
-    #finder[style*="display: block"],
-    #finder[style*="display:block"],
-    #contact[style*="display: block"],
-    #contact[style*="display:block"],
-    #resume[style*="display: block"],
-    #resume[style*="display:block"],
-    #safari[style*="display: block"],
-    #safari[style*="display:block"],
-    #photos[style*="display: block"],
-    #photos[style*="display:block"],
-    #terminal[style*="display: block"],
-    #terminal[style*="display:block"],
-    #vscode[style*="display: block"],
-    #vscode[style*="display:block"],
-    #txtfile[style*="display: block"],
-    #txtfile[style*="display:block"],
-    #imgfile[style*="display: block"],
-    #imgfile[style*="display:block"],
-    #music[style*="display: block"],
-    #music[style*="display:block"],
-    #game[style*="display: block"],
-    #game[style*="display:block"],
-    #wallpaper[style*="display: block"],
-    #wallpaper[style*="display:block"] {
-      display: block !important;
     }
 
     #finder {

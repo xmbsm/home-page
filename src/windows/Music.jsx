@@ -206,4 +206,5 @@ const Music = () => {
 
 const MusicWindow = WindowWrapper(Music, 'music')
 
+export { Music }
 export default MusicWindow

@@ -298,4 +298,5 @@ const Contact = () => {
 
 const ContactWindow = WindowWrapper(Contact, 'contact')
 
+export { Contact }
 export default ContactWindow;

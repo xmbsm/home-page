@@ -48,4 +48,5 @@ const ImageFile = () => {
 
 const ImageWindow = WindowWrapper(ImageFile, 'imgfile')
 
+export { ImageFile as Image }
 export default ImageWindow
