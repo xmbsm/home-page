@@ -172,10 +172,6 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
       gap: 12px;
     }
 
-    > div:nth-child(3) {
-      display: none;
-    }
-
     .logo-portfolio-container {
       display: flex;
       align-items: center;
@@ -359,32 +355,46 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
         }
       }
 
-      > div:nth-child(3) {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: rgba(30, 30, 30, 0.95);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 1rem;
-      z-index: 50;
-      animation: slideDown 0.2s ease-out;
-    }
+      .mobile-menu {
+        position: fixed !important;
+        top: 52px !important;
+        left: 16px !important;
+        right: 16px !important;
+        bottom: 16px !important;
+        height: auto !important;
+        max-height: calc(100vh - 68px) !important;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        border-radius: 16px;
+        padding: 1rem;
+        z-index: 2147483647 !important;
+        animation: slideDown 0.2s ease-out;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+      }
 
-    > div:nth-child(3).mobile-menu-open {
-      display: block;
-    }
+      .mobile-menu > ul {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        height: auto !important;
+        min-height: 400px !important;
+        list-style: none !important;
+        width: 100% !important;
+      }
+      
+      .mobile-menu > ul > li {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+      }
 
-    > div:nth-child(3) > div {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      padding: 0 16px;
-    }
-
-    > div:nth-child(3) button {
+      .mobile-menu button {
       display: flex;
       align-items: center;
       text-align: left;
@@ -1029,7 +1039,7 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
   /* Mobile responsive styles */
   @media (max-width: 640px) {
     nav {
-      @apply px-3 py-1 flex flex-row justify-between items-center h-10;
+      @apply px-3 py-1 flex flex-row justify-between items-center;
       
       > div:nth-child(1) {
         display: flex !important;

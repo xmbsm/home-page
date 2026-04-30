@@ -1,14 +1,13 @@
 import { navIcons, navLinks, locations } from "#constants";
 import useWindowStore from '#store/window';
 import useLocationStore from '#store/location';
-import { useEffect, useRef, useCallback, useState } from "react";
-import React from "react";
+import { useEffect, useRef, useState } from "react";
 import Clock from './Clock';
 import NavLink from "./NavLink";
 
 const isMobile = typeof window !== 'undefined' && window.innerWidth <= 640;
 
-const NavBar = React.memo(() => {
+const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const openWindow = useWindowStore(state => state.openWindow);
   const setActiveLocation = useLocationStore(state => state.setActiveLocation);
@@ -18,7 +17,19 @@ const NavBar = React.memo(() => {
   const logoPortfolioRef = useRef(null);
   const logoPortfolioPlaceholderRef = useRef(null);
   const settingsButtonRef = useRef(null);
-  const mobileMenuRef = useRef(null);
+  const mobileMenuBtnRef = useRef(null);
+
+  useEffect(() => {
+    const handleMenuClick = () => {
+      setIsMobileMenuOpen(prev => !prev);
+    };
+    
+    const btn = mobileMenuBtnRef.current;
+    if (btn) {
+      btn.addEventListener('click', handleMenuClick);
+      return () => btn.removeEventListener('click', handleMenuClick);
+    }
+  }, []);
 
   useEffect(() => {
     if (isMobile) return;
@@ -97,22 +108,7 @@ const NavBar = React.memo(() => {
     });
   }, []);
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-      if (mobileMenuRef.current && !mobileMenuRef.current.contains(e.target) && 
-          mobileMenuBtn && !mobileMenuBtn.contains(e.target)) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-    
-    if (isMobileMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isMobileMenuOpen]);
-  
-  const handleNavLinkClick = useCallback((type) => {
+  const handleNavLinkClick = (type) => {
     if (!type) return;
 
     if (type === 'finder') {
@@ -121,9 +117,9 @@ const NavBar = React.memo(() => {
 
     openWindow(type);
     setIsMobileMenuOpen(false);
-  }, [openWindow, setActiveLocation]);
+  };
 
-  const handleIconClick = useCallback(({ type, action }) => {
+  const handleIconClick = ({ type, action }) => {
     if (!type) return;
     
     openWindow(type);
@@ -132,7 +128,7 @@ const NavBar = React.memo(() => {
       setActiveLocation(locations.about);
     }
     setIsMobileMenuOpen(false);
-  }, [openWindow, setActiveLocation]);
+  };
 
   const handleSettingsClick = () => {
     const rect = settingsButtonRef.current?.getBoundingClientRect();
@@ -193,8 +189,8 @@ const NavBar = React.memo(() => {
           <Clock />
           
           <button
+            ref={mobileMenuBtnRef}
             className="mobile-menu-btn p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
@@ -207,25 +203,28 @@ const NavBar = React.memo(() => {
           </button>
         </div>
 
-        <div className={`mobile-menu ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`} ref={mobileMenuRef}>
-          <div className="flex flex-col gap-2 px-4">
+        <div className="mobile-menu" style={{ display: isMobileMenuOpen ? 'block' : 'none' }}>
+          <ul className="flex flex-col gap-2 px-4 m-0 p-0 list-none">
             {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => handleNavLinkClick(link.type)}
-                className="mobile-nav-link text-left px-4 py-3 rounded-lg transition-colors"
-              >
-                <span>{link.name}</span>
-              </button>
+              <li key={link.id} className="m-0 p-0">
+                <button
+                  onClick={() => handleNavLinkClick(link.type)}
+                  className="mobile-nav-link text-left px-4 py-3 rounded-lg transition-colors w-full"
+                >
+                  <span>{link.name}</span>
+                </button>
+              </li>
             ))}
-            <div className="border-t border-gray-200 my-2"></div>
-            <button
-              onClick={handleSettingsClick}
-              className="mobile-nav-link text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-2"
-            >
-              <img src="/icons/mode.svg" alt="settings" className="w-5 h-5" />
-              <span>设置</span>
-            </button>
+            <li className="m-0 p-0 border-t border-gray-200 my-2"></li>
+            <li className="m-0 p-0">
+              <button
+                onClick={handleSettingsClick}
+                className="mobile-nav-link text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-2 w-full"
+              >
+                <img src="/icons/mode.svg" alt="settings" className="w-5 h-5" />
+                <span>设置</span>
+              </button>
+            </li>
             {navIcons.map(({ id, img, type, action }) => {
               const iconNames = {
                 2: '搜索',
@@ -234,22 +233,23 @@ const NavBar = React.memo(() => {
                 6: '壁纸'
               };
               return (
-                <button
-                  key={id}
-                  onClick={() => handleIconClick({ type, action })}
-                  className="mobile-nav-link text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-2"
-                >
-                  <img src={img} alt={`icon-${id}`} className="w-5 h-5" />
-                  <span>{iconNames[id] || id}</span>
-                </button>
+                <li key={id} className="m-0 p-0">
+                  <button
+                    onClick={() => handleIconClick({ type, action })}
+                    className="mobile-nav-link text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-2 w-full"
+                  >
+                    <img src={img} alt={`icon-${id}`} className="w-5 h-5" />
+                    <span>{iconNames[id] || id}</span>
+                  </button>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </div>
       </nav>
     </>
   );
-});
+}
 
 NavBar.displayName = 'NavBar';
 
