@@ -105,7 +105,7 @@ const App = () => {
         {windows['trash']?.isOpen && <Suspense fallback={null}><Trash /></Suspense>}
         {windows['wallpaper']?.isOpen && <Suspense fallback={null}><Wallpaper /></Suspense>}
         
-        {!isMobile && <Suspense fallback={null}><Home /></Suspense>}
+        <Suspense fallback={null}><Home /></Suspense>
       </main>
       
       {!isMobile && (

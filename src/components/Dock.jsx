@@ -4,6 +4,13 @@ import useWindowStore from '#store/window';
 import useLocationStore from '#store/location';
 
 const Dock = React.memo(() => {
+  const mobileIcons = [
+    { id: 'finder', name: '作品集', canOpen: true },
+    { id: 'music', name: '音乐', canOpen: true },
+    { id: 'contact', name: '联系', canOpen: true },
+    { id: 'safari', name: '文章', canOpen: true },
+    { id: 'photos', name: '相册', canOpen: true },
+  ];
   const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth <= 640);
   const dockRef = useRef(null);
   const containerRef = useRef(null);
@@ -166,9 +173,9 @@ const Dock = React.memo(() => {
           top: 'auto !important',
           transform: 'translateX(-50%) !important',
           zIndex: 9999,
-          width: '312px',
-          maxWidth: '312px',
-          minWidth: '312px',
+          width: '350px',
+          maxWidth: '350px',
+          minWidth: '350px',
           padding: '6px',
           margin: '0',
           background: 'rgba(255, 255, 255, 0.1)',
@@ -239,8 +246,8 @@ const Dock = React.memo(() => {
                 key={id}
                 className='relative flex justify-center'
                 style={isMobile ? {
-                  width: '70px',
-                  height: '70px',
+                  width: '64px',
+                  height: '64px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -267,8 +274,8 @@ const Dock = React.memo(() => {
                     });
                   }}
                   style={isMobile ? {
-                    width: '70px',
-                    height: '70px',
+                    width: '64px',
+                    height: '64px',
                     padding: '0',
                     margin: '0',
                     background: 'transparent',

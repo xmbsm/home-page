@@ -210,7 +210,7 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
     .logo-portfolio-container {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 8px;
       user-select: none;
       
       img {
@@ -1236,27 +1236,31 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
       @apply px-3 py-2 text-xs;
     }
 
-    #home {
-      ul {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        padding: 1rem;
-        gap: 1rem;
-        
-        li {
-          position: relative;
-          margin: 0;
-          
-          img {
-            @apply size-12;
-          }
-          
-          p {
-            @apply text-xs;
-          }
-        }
-      }
+    #home ul {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      justify-content: flex-start !important;
+      padding: 1rem !important;
+      gap: 1rem !important;
+    }
+    
+    #home ul li {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+      transform: none !important;
+      margin: 0 !important;
+    }
+    
+    #home ul li img {
+      width: 48px !important;
+      height: 48px !important;
+    }
+    
+    #home ul li p {
+      font-size: 0.75rem !important;
     }
   }
 
