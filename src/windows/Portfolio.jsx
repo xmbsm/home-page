@@ -4,11 +4,11 @@ import React from "react";
 
 const projects = [
   {
-    title: "Echonet",
-    desc: "A DePIN that rewards providers of validated, real-world sound data with on-chain crypto.",
+    title: "小酷素材",
+    desc: "专注海外商业设计精品素材，每日稳定更新10+款",
     img: "/images/echonet-cover.webp",
-    tags: ["DePIN", "Web3", "DevOps", "Hardware", "CI/CD", "Edge Data", "The Graph", "IPFS"],
-    liveUrl: "https://echonet.ai",
+    tags: ["设计素材", "海外素材", "样机模板", "矢量插画", "笔刷", "图形图标", "平面图形", "网页模板"],
+    liveUrl: "https://sucai.kusheji.com/",
     codeUrl: "#",
   },
   {
@@ -195,19 +195,7 @@ const ProjectCard = ({ project }) => {
               <polyline points="15 3 21 3 21 9" />
               <line x1="10" y1="14" x2="21" y2="3" />
             </svg>
-            Live Demo
-          </a>
-          <a href={project.codeUrl} target="_blank" rel="noopener noreferrer" style={{
-            flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
-            gap: '8px', padding: '12px 20px', borderRadius: '12px', background: '#1a1a2e',
-            color: '#fff', fontSize: '0.88rem', fontWeight: 600, textDecoration: 'none',
-            cursor: 'pointer', border: 'none', transition: 'background 0.2s ease',
-          }}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="16 18 22 12 16 6" />
-              <polyline points="8 6 2 12 8 18" />
-            </svg>
-            Code
+            立即前往
           </a>
         </div>
       </div>
@@ -220,7 +208,7 @@ const Portfolio = () => {
     <>
       <div id="window-header" className="window-drag-handle">
         <WindowControls target="portfolio" />
-        <h2 className="font-bold">作品集</h2>
+        <h2 className="font-bold flex-1 text-center">项目</h2>
       </div>
       <div style={{
         height: '100%',
@@ -231,13 +219,13 @@ const Portfolio = () => {
       }}>
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <h1 style={{ fontSize: '2.25rem', fontWeight: 800, margin: '0 0 14px', color: '#1a1a2e' }}>
-            Featured Projects
+            精选项目
           </h1>
           <p style={{
             fontSize: '1.05rem', color: '#6b7280', margin: 0, maxWidth: '640px',
             marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.7,
           }}>
-            A showcase of my recent work, featuring full-stack applications, web development projects, and innovative solutions.
+            展示我最近的工作成果，包括全栈应用、Web 开发项目和创新解决方案。
           </p>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
