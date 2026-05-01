@@ -1,8 +1,8 @@
 const navLinks = [
   {
     id: 1,
-    name: "项目",
-    type: "finder",
+    name: "作品集",
+    type: "portfolio",
   },
   {
     id: 3,
@@ -48,8 +48,8 @@ const navIcons = [
 
 const dockApps = [
   {
-    id: "finder",
-    name: "作品集", // was "Finder"
+    id: "portfolio",
+    name: "作品集",
     icon: "finder.png",
     canOpen: true,
   },
@@ -1013,6 +1013,7 @@ const INITIAL_Z_INDEX = 1000;
 
 const WINDOW_CONFIG = {
   finder: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: INITIAL_Z_INDEX, data: null },
+  portfolio: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: INITIAL_Z_INDEX, data: null },
   contact: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: INITIAL_Z_INDEX, data: null },
   resume: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: INITIAL_Z_INDEX, data: null },
   safari: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: INITIAL_Z_INDEX, data: null },

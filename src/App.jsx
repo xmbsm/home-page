@@ -8,6 +8,7 @@ const Home = lazy(() => import('./components/Home.jsx'))
 const ControlPanel = lazy(() => import('./components/ControlPanel.jsx'))
 
 const Finder = lazy(() => import('./windows/Finder.jsx'))
+const Portfolio = lazy(() => import('./windows/Portfolio.jsx'))
 const Resume = lazy(() => import('./windows/Resume.jsx'))
 const Safari = lazy(() => import('./windows/Safari.jsx'))
 const Terminal = lazy(() => import('./windows/Terminal.jsx'))
@@ -97,6 +98,7 @@ const App = () => {
         {windows['imgfile']?.isOpen && <Suspense fallback={null}><Image /></Suspense>}
         {windows['txtfile']?.isOpen && <Suspense fallback={null}><Text /></Suspense>}
         {windows['finder']?.isOpen && <Suspense fallback={null}><Finder /></Suspense>}
+        {windows['portfolio']?.isOpen && <Suspense fallback={null}><Portfolio /></Suspense>}
         {windows['contact']?.isOpen && <Suspense fallback={null}><Contact /></Suspense>}
         {windows['photos']?.isOpen && <Suspense fallback={null}><Photos /></Suspense>}
         {windows['music']?.isOpen && <Suspense fallback={null}><Music /></Suspense>}

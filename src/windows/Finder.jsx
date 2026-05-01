@@ -61,11 +61,11 @@ const Finder = () => {
           {renderList("收藏夹", Object.values(locations))}
           {renderList("我的项目", locations.work.children)}
         </div>
-        <ul className="content">
+        <ul className="content" id="finder-content-list">
           {activeLocation.children.map((item) => (
             <li
               key={item.id}
-              className={item.position}
+              className="finder-item"
               onClick={(e) => {
                 e.stopPropagation();
                 openItem(item);

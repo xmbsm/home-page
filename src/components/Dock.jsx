@@ -5,7 +5,7 @@ import useLocationStore from '#store/location';
 
 const Dock = React.memo(() => {
   const mobileIcons = [
-    { id: 'finder', name: '作品集', canOpen: true },
+    { id: 'portfolio', name: '作品集', canOpen: true },
     { id: 'music', name: '音乐', canOpen: true },
     { id: 'contact', name: '联系', canOpen: true },
     { id: 'safari', name: '文章', canOpen: true },
@@ -147,6 +147,11 @@ const Dock = React.memo(() => {
     if (app.action === 'trash') {
       openWindow('finder');
       setActiveLocation(locations.trash);
+      return;
+    }
+
+    if (app.id === 'portfolio') {
+      openWindow('portfolio');
       return;
     }
 
