@@ -929,7 +929,58 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
     }
   }
 
-  #home {
+  #finder {
+      .sidebar {
+        display: none !important;
+      }
+      
+      .content {
+        padding: 0.5rem !important;
+        max-width: none !important;
+        width: 100% !important;
+        height: 100% !important;
+        overflow-y: auto !important;
+      }
+      
+      .content ul {
+        position: relative !important;
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 0.75rem !important;
+        padding: 0.5rem !important;
+        width: 100% !important;
+        height: auto !important;
+      }
+      
+      .content ul li {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0.5rem !important;
+        gap: 0.25rem !important;
+      }
+      
+      .content ul li img {
+        width: 40px !important;
+        height: 40px !important;
+      }
+      
+      .content ul li p {
+        font-size: 0.65rem !important;
+        text-align: center !important;
+        line-height: 1.2 !important;
+        width: 100% !important;
+        max-width: none !important;
+      }
+    }
+
+    #home {
     @apply relative z-0;
 
     ul {
