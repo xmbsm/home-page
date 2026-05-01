@@ -1,7 +1,7 @@
 const navLinks = [
   {
     id: 1,
-    name: "作品集",
+    name: "项目",
     type: "portfolio",
   },
   {
@@ -44,7 +44,7 @@ const navIcons = [
 const dockApps = [
   {
     id: "portfolio",
-    name: "作品集",
+    name: "项目",
     icon: "finder.png",
     canOpen: true,
   },
