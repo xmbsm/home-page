@@ -463,11 +463,11 @@ const WORK_LOCATION = {
     // ▶ Project 1 Cyberpunk
     {
       id: 5,
-      name: "Cyberpunk",
+      name: "素材",
       icon: "/images/folder.webp",
       kind: "folder",
-      position: "top-45 right-80 ",
-      windowPosition: "top-[10vh] left-15", // optional: Finder window position
+      position: "top-14 left-16",
+      windowPosition: "top-[80px] left-[120px]",
       children: [
         {
           id: 1,
@@ -516,11 +516,11 @@ const WORK_LOCATION = {
     // ▶ Project 2 ShopKar
     {
       id: 6,
-      name: "ShopKar",
+      name: "字体",
       icon: "/images/folder.webp",
       kind: "folder",
-      position: "top-10 left-0", // icon position inside Finder
-      windowPosition: "top-[25vh] left-30",
+      position: "top-40 left-16",
+      windowPosition: "top-[220px] left-[120px]",
       children: [
         {
           id: 1,
@@ -569,11 +569,11 @@ const WORK_LOCATION = {
     // ▶ Project 3 Tidy Tasks
     {
       id: 7,
-      name: "Tidy Tasks",
+      name: "文件夹",
       icon: "/images/folder.webp",
       kind: "folder",
-      position: "top-10 left-50",
-      windowPosition: "top-[40vh] left-15",
+      position: "top-65 left-15",
+      windowPosition: "top-[360px] left-[120px]",
       children: [
         {
           id: 1,
@@ -622,11 +622,11 @@ const WORK_LOCATION = {
     // ▶ Project 5 VS Code Web IDE
     {
       id: 10,
-      name: "VS Code Web IDE",
+      name: "书签",
       icon: "/images/folder.webp",
       kind: "folder",
-      position: "top-45 right-30",
-      windowPosition: "top-[40vh] left-40",
+      position: "top-40 left-45",
+      windowPosition: "top-[220px] left-[280px]",
       children: [
         {
           id: 1,
@@ -675,21 +675,21 @@ const WORK_LOCATION = {
     // PentaGo Online
     {
       id: 11,
-      name: "PentaGo Online",
+      name: "知识库",
       icon: "/images/folder.webp",
       kind: "folder",
-      position: "top-10 right-5",
-      windowPosition: "top-[10vh] left-40",
+      position: "top-15 left-45",
+      windowPosition: "top-[80px] left-[280px]",
       children: [
         {
           id: 1,
-          name: "PentaGo Online.txt",
+          name: "知识库.txt",
           icon: "/images/txt.png",
           kind: "file",
           fileType: "txt",
           position: "top-67 right-85",
           image: "/images/pentagoonline.png",
-          subtitle: "PentaGo Online",
+          subtitle: "知识库",
           description: [
             "PentaGo Online is a real-time multiplayer strategy game I built using React, TypeScript, and Socket.io.",
             "The game is based on the Pentago board system, where players not only place pieces but also rotate sections of the board, which makes state management and game logic significantly more complex than traditional grid-based games. I implemented complete game logic including turn handling, quadrant rotation, and win detection.",
