@@ -27,9 +27,10 @@ const ControlPanel = React.memo(() => {
           y: window.innerHeight / 2
         });
       } else {
+        const btnBottom = detail.y || 50;
         setPanelPosition({
           x: detail.x || window.innerWidth - 288 - 20,
-          y: detail.y || 80
+          y: btnBottom + 10
         });
       }
       setIsPanelOpen(true);

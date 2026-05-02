@@ -194,6 +194,10 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
 
   #finder .content {
     padding: 1rem !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 24px !important;
+    justify-content: space-around !important;
   }
   
   #finder .sidebar {
@@ -213,7 +217,8 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
   }
   
   #finder .content .finder-item {
-    flex: 0 0 100% !important;
+    flex: 0 0 calc(50% - 12px) !important;
+    max-width: calc(50% - 12px) !important;
     flex-direction: column !important;
     align-items: center !important;
     gap: 0.35rem !important;
