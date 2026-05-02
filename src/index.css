@@ -723,7 +723,7 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
   }
 
   #safari {
-    @apply w-4xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-4xl h-[600px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
 
     .search {
       @apply flex items-center gap-3 w-2/3 bg-white border border-gray-300 rounded-lg px-3 py-2;
@@ -734,7 +734,8 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
     }
 
     .blog {
-      @apply bg-white p-10 max-w-3xl mx-auto;
+      @apply bg-white p-10 max-w-3xl mx-auto overflow-y-auto;
+      max-height: calc(100% - 40px);
 
       h2 {
         @apply text-xl font-bold text-pink-600 mb-10;
@@ -1283,6 +1284,12 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
       height: 70vh;
     }
 
+    #safari .blog {
+      overflow-y: auto !important;
+      max-height: calc(100% - 40px) !important;
+      padding: 1rem !important;
+    }
+
     #terminal {
       width: 90vw;
       height: 70vh;
@@ -1348,7 +1355,7 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
       display: flex !important;
       flex-wrap: wrap !important;
       justify-content: flex-start !important;
-      padding: 3rem 1rem 1rem 2rem !important;
+      padding: 2rem 1rem 1rem 2rem !important;
       gap: 1rem !important;
     }
     
