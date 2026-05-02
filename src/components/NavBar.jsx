@@ -226,7 +226,7 @@ const NavBar = () => {
               transition: 'all 0.2s ease',
             }}
           >
-            <img src="/icons/mode.svg" alt="settings" style={{ width: '22px', height: '22px', filter: 'brightness(1.2)' }} />
+            <img src="/icons/mode.svg" alt="settings" style={{ width: '22px', height: '22px', filter: 'brightness(0) invert(1)' }} />
             <span>设置</span>
           </button>
         </li>
@@ -261,7 +261,7 @@ const NavBar = () => {
                   transition: 'all 0.2s ease',
                 }}
               >
-                <img src={img} alt={`icon-${id}`} style={{ width: '22px', height: '22px', filter: 'brightness(1.2)' }} />
+                <img src={img} alt={`icon-${id}`} style={{ width: '22px', height: '22px', filter: 'brightness(0) invert(1)' }} />
                 <span>{iconNames[id] || id}</span>
               </button>
             </li>

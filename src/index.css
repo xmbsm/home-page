@@ -141,7 +141,7 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
   }
 
   #portfolio > div:last-child {
-    padding: 12px !important;
+    padding: 12px 12px 50px 12px !important;
   }
   
   #portfolio > div:last-child > div:first-child {
@@ -1274,6 +1274,11 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
       height: 60vh;
     }
 
+    #contact > div {
+      overflow-y: auto !important;
+      max-height: calc(100% - 40px) !important;
+    }
+
     #wallpaper {
       width: 90vw;
       height: 70vh;
@@ -1287,7 +1292,7 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
     #safari .blog {
       overflow-y: auto !important;
       max-height: calc(100% - 40px) !important;
-      padding: 1rem !important;
+      padding: 1rem 1rem 80px 1rem !important;
     }
 
     #terminal {
