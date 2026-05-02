@@ -202,7 +202,7 @@ const WindowWrapper = (Component, windowKey) => {
               backgroundColor: '#ffffff',
               borderRadius: isMaximized ? '0' : '16px',
               overflow: 'hidden',
-              boxShadow: isMaximized ? 'none' : '0 20px 60px rgba(0,0,0,0.3)',
+              boxShadow: isMobile ? '0 5px 15px rgba(0,0,0,0.08)' : isMaximized ? 'none' : '0 10px 30px rgba(0,0,0,0.15)',
             }}>
             <Component {...props} />
           </div>

@@ -707,6 +707,13 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
     }
   }
 
+  .window-root {
+    --tw-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.125) !important;
+    --tw-drop-shadow: drop-shadow(0 25px 25px rgba(0, 0, 0, 0.075)) !important;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.15) !important;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.075)) !important;
+  }
+
   #wallpaper {
     @apply w-4xl h-[600px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
   }
@@ -1252,6 +1259,8 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
 
     .window-root {
       z-index: 2147483647 !important;
+      box-shadow: 0 5px 15px -2px rgba(0, 0, 0, 0.08) !important;
+      filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.04)) !important;
     }
 
     #finder {
