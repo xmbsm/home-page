@@ -124,7 +124,7 @@ const Music = () => {
             <img src={current?.cover || '/images/music.webp'} alt={current?.title || 'Cover'} loading='lazy' />
           </div>
           <div className='mt-6 text-center'>
-            <h3 className='text-3xl font-bold'>{current?.title || 'Unknown'}</h3>
+            <h3 className='text-xl sm:text-2xl font-bold'>{current?.title || 'Unknown'}</h3>
             <p className='text-sm text-gray-500 mt-1'>{current?.author || 'Unknown'}</p>
           </div>
           <div className='sliders mt-3'>

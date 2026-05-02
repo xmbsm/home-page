@@ -1363,8 +1363,8 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
     }
     
     #home ul li img {
-      width: 72px !important;
-      height: 72px !important;
+      width: 64px !important;
+      height: 64px !important;
     }
     
     #home ul li p {

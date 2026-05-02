@@ -52,7 +52,7 @@ const Wallpaper = () => {
         <div className='w-10'></div>
       </div>
       <div className='bg-white p-6 overflow-y-auto flex-1 min-h-0'>
-        <div className='grid grid-cols-3 gap-4'>
+        <div className='grid grid-cols-2 sm:grid-cols-3 gap-4'>
           {wallpapers.map((wallpaper) => (
             <WallpaperItem 
               key={wallpaper.id} 
