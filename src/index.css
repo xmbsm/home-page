@@ -395,26 +395,11 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
         padding: 2px 4px;
         cursor: pointer;
 
-        span:first-child {
+        span {
           font-size: 0.875rem;
           font-weight: 500;
           color: rgba(255, 255, 255, 0.9);
           transition: color 0.3s ease;
-        }
-
-        span:last-child {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 1.5px;
-          background: white;
-          transform: scaleX(0);
-          transition: transform 0.3s ease;
-        }
-
-        &:hover span:last-child {
-          transform: scaleX(1);
         }
       }
     }
@@ -455,7 +440,7 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
         }
 
         ul {
-          display: none !important;
+          gap: 12px;
         }
       }
 
@@ -859,10 +844,10 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
     }
 
     ul {
-      @apply flex items-center gap-3;
+      @apply flex items-center gap-3 flex-wrap;
 
       li {
-        @apply rounded-lg p-3 w-60 hover:-translate-y-0.5 hover:scale-105 origin-center transition-all duration-300;
+        @apply rounded-lg p-3 flex-[0_0_calc(50%-6px)] hover:-translate-y-0.5 hover:scale-105 origin-center transition-all duration-300;
 
         a {
           @apply space-y-5;
@@ -1018,7 +1003,7 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
   }
 
   #txtfile {
-    @apply w-md h-[550px] absolute top-36 right-32 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-md h-[550px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
 
     h2 {
       @apply font-bold text-sm text-center w-full;
@@ -1026,7 +1011,7 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
   }
 
   #imgfile {
-    @apply w-xl absolute top-40 left-2/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
 
     #window-header {
       p {

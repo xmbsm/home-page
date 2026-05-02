@@ -9,14 +9,29 @@ const ControlPanel = React.memo(() => {
   const [panelPosition, setPanelPosition] = useState({ x: 0, y: 0 });
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const panelRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 640);
+    const handleResize = () => setIsMobile(window.innerWidth <= 640);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   useEffect(() => {
     const handleOpenPanel = (e) => {
       const detail = e.detail || {};
-      setPanelPosition({
-        x: detail.x || window.innerWidth - 288 - 20,
-        y: detail.y || 80
-      });
+      if (window.innerWidth <= 640) {
+        setPanelPosition({
+          x: window.innerWidth / 2,
+          y: window.innerHeight / 2
+        });
+      } else {
+        setPanelPosition({
+          x: detail.x || window.innerWidth - 288 - 20,
+          y: detail.y || 80
+        });
+      }
       setIsPanelOpen(true);
     };
     document.addEventListener('openControlPanel', handleOpenPanel);
@@ -63,8 +78,9 @@ const ControlPanel = React.memo(() => {
       ref={panelRef} 
       className="fixed z-50 w-72 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden"
       style={{ 
-        left: panelPosition.x - 288, 
-        top: panelPosition.y 
+        left: isMobile ? '50%' : panelPosition.x - 288, 
+        top: isMobile ? '50%' : panelPosition.y,
+        transform: isMobile ? 'translate(-50%, -50%)' : 'none',
       }}
     >
       <div className="p-4" style={{ all: 'initial' }}>

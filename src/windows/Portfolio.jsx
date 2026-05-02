@@ -6,49 +6,25 @@ const projects = [
   {
     title: "小酷素材",
     desc: "专注海外商业设计精品素材，每日稳定更新10+款",
-    img: "/images/echonet-cover.webp",
+    img: "/images/sucai-cover.svg",
     tags: ["设计素材", "海外素材", "样机模板", "矢量插画", "笔刷", "图形图标", "平面图形", "网页模板"],
     liveUrl: "https://sucai.kusheji.com/",
     codeUrl: "#",
   },
   {
-    title: "Dev Mux",
-    desc: "A collaboration platform featuring video calls, code editing, and a whiteboard with real-time sync via LiveKit and CodeSandbox.",
-    img: "/images/devmux-cover.webp",
-    tags: ["Docker", "Canvas", "Prisma", "PostgreSQL", "Node.js", "LiveKit", "Websockets", "WebRTC"],
-    liveUrl: "https://devmux.com",
+    title: "免费字体",
+    desc: "免费可商用中文字体下载网站，无版权免费字体下载！",
+    img: "/images/ziti-cover.svg",
+    tags: ["免费字体", "可商用字体", "字体下载", "中文字体", "英文字体", "无版权字体"],
+    liveUrl: "https://ziti.kusheji.com/",
     codeUrl: "#",
   },
   {
-    title: "ShopKar",
-    desc: "An AI-powered shopping assistant that helps users find the best products through natural conversation.",
-    img: "/images/shopkar-cover.webp",
-    tags: ["React", "Node.js", "AI", "E-commerce", "MongoDB"],
-    liveUrl: "#",
-    codeUrl: "#",
-  },
-  {
-    title: "Tidy Tasks",
-    desc: "A smart task management app with AI-powered prioritization and natural language input.",
-    img: "/images/tidytasks-cover.webp",
-    tags: ["Next.js", "TypeScript", "AI", "Prisma"],
-    liveUrl: "#",
-    codeUrl: "#",
-  },
-  {
-    title: "VS Code Web IDE",
-    desc: "A full-featured web-based IDE with cloud sync, extensions, and real-time collaboration.",
-    img: "/images/vscode-cover.webp",
-    tags: ["TypeScript", "WebAssembly", "WebSocket", "Monaco Editor"],
-    liveUrl: "#",
-    codeUrl: "#",
-  },
-  {
-    title: "PentaGo Online",
-    desc: "A multiplayer board game platform with real-time gameplay and tournament features.",
-    img: "/images/pentago-cover.webp",
-    tags: ["React", "Socket.io", "Game Design", "WebRTC"],
-    liveUrl: "#",
+    title: "矢量LOGO下载",
+    desc: "专注收录国内外矢量 LOGO，免费在线下载矢量 LOGO 素材，为设计师和开发者提供高质量的品牌标识资源。",
+    img: "/images/logo-cover.svg",
+    tags: ["logo下载", "标志下载"],
+    liveUrl: "https://logo.kusheji.com/",
     codeUrl: "#",
   },
   {
@@ -67,6 +43,7 @@ const ProjectCard = ({ project }) => {
   return (
     <div className="project-card" style={{
       display: 'flex',
+      flexDirection: 'column',
       background: '#fff',
       borderRadius: '16px',
       overflow: 'hidden',
@@ -75,8 +52,8 @@ const ProjectCard = ({ project }) => {
     }}>
       <div style={{
         position: 'relative',
-        width: '48%',
-        minHeight: '280px',
+        width: '100%',
+        minHeight: '200px',
         background: '#1a1a2e',
         overflow: 'hidden',
         flexShrink: 0,
@@ -118,32 +95,9 @@ const ProjectCard = ({ project }) => {
             <span style={{ fontSize: '0.9rem', fontWeight: 600, letterSpacing: '0.5px' }}>{project.title}</span>
           </div>
         )}
-        <div style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '56px',
-          height: '56px',
-          borderRadius: '50%',
-          background: 'rgba(255,255,255,0.2)',
-          backdropFilter: 'blur(8px)',
-          WebkitBackdropFilter: 'blur(8px)',
-          border: '2px solid rgba(255,255,255,0.4)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: 'pointer',
-          transition: 'transform 0.2s ease',
-        }}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="white" style={{ marginLeft: '3px' }}>
-            <polygon points="5 3 19 12 5 21 5 3" />
-          </svg>
-        </div>
       </div>
 
       <div style={{
-        flex: 1,
         padding: '28px 32px',
         display: 'flex',
         flexDirection: 'column',
@@ -228,7 +182,7 @@ const Portfolio = () => {
             展示我最近的工作成果，包括全栈应用、Web 开发项目和创新解决方案。
           </p>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '32px' }}>
           {projects.map((project) => (
             <ProjectCard key={project.title} project={project} />
           ))}

@@ -688,6 +688,8 @@ const WORK_LOCATION = {
           kind: "file",
           fileType: "txt",
           position: "top-67 right-85",
+          image: "/images/pentagoonline.png",
+          subtitle: "PentaGo Online",
           description: [
             "PentaGo Online is a real-time multiplayer strategy game I built using React, TypeScript, and Socket.io.",
             "The game is based on the Pentago board system, where players not only place pieces but also rotate sections of the board, which makes state management and game logic significantly more complex than traditional grid-based games. I implemented complete game logic including turn handling, quadrant rotation, and win detection.",
