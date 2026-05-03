@@ -45,25 +45,25 @@ const dockApps = [
   {
     id: "portfolio",
     name: "项目",
-    icon: "finder.png",
+    icon: "portfolio.svg",
     canOpen: true,
   },
   {
     id: "safari",
     name: "文章", // was "Safari"
-    icon: "safari.webp",
+    icon: "blog.svg",
     canOpen: true,
   },
   {
     id: "photos",
     name: "相册", // was "Photos"
-    icon: "photos.webp",
+    icon: "photos.svg",
     canOpen: true,
   },
   {
     id: "contact",
     name: "联系", // or "Get in touch"
-    icon: "contact.webp",
+    icon: "contact.svg",
     canOpen: true,
   },
   {
@@ -81,7 +81,7 @@ const dockApps = [
   {
     id: "music",
     name: "音乐", // was "Trash"
-    icon: "music.webp",
+    icon: "music.svg",
     canOpen: true,
   },
   {
@@ -483,7 +483,7 @@ const WORK_LOCATION = {
         {
           id: 2,
           name: "点击访问",
-          icon: "/images/safari.webp",
+          icon: "/images/blog.svg",
           kind: "file",
           fileType: "url",
           href: "https://sucai.kusheji.com/",
@@ -526,7 +526,7 @@ const WORK_LOCATION = {
         {
           id: 2,
           name: "小酷字体",
-          icon: "/images/safari.webp",
+          icon: "/images/blog.svg",
           kind: "file",
           fileType: "url",
           href: "https://ziti.kusheji.com/",
@@ -570,7 +570,7 @@ const WORK_LOCATION = {
         {
           id: 2,
           name: "kusheji.com",
-          icon: "/images/safari.webp",
+          icon: "/images/blog.svg",
           kind: "file",
           fileType: "url",
           href: "https://kusheji.com/",
@@ -620,7 +620,7 @@ const WORK_LOCATION = {
         {
           id: 2,
           name: "酷设计",
-          icon: "/images/safari.webp",
+          icon: "/images/blog.svg",
           kind: "file",
           fileType: "url",
           href: "https://kusheji.com/",
@@ -663,7 +663,7 @@ const WORK_LOCATION = {
         {
           id: 2,
           name: "知识库",
-          icon: "/images/safari.webp",
+          icon: "/images/blog.svg",
           kind: "file",
           fileType: "url",
           href: "https://kusheji.com/",
@@ -702,7 +702,7 @@ const ABOUT_LOCATION = {
     {
       id: 2,
       name: "官网",
-      icon: "/images/safari.webp",
+      icon: "/images/blog.svg",
       kind: "file",
       fileType: "url",
       href: "https://kusheji.com/",
@@ -816,7 +816,7 @@ const TRASH_LOCATION = {
     {
       id: 5,
       name: "kusheji.com",
-      icon: "/images/safari.webp",
+      icon: "/images/blog.svg",
       kind: "file",
       fileType: "url",
       href: "https://kusheji.com/",

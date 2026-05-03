@@ -169,7 +169,7 @@ const Portfolio = () => {
         overflowY: 'auto',
         overflowX: 'hidden',
         padding: '32px 36px 80px 36px',
-        background: 'linear-gradient(135deg, #e0e7ff 0%, #fce4ec 40%, #e0f7fa 100%)',
+        background: '#fff',
       }}>
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <h1 style={{ fontSize: '2.25rem', fontWeight: 800, margin: '0 0 14px', color: '#1a1a2e' }}>
