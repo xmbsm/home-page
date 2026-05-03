@@ -39,12 +39,12 @@ const App = () => {
   
   useEffect(() => {
     const saved = localStorage.getItem('wallpaperUrl');
-    if (saved && !isMobile) {
+    if (saved) {
       document.documentElement.style.setProperty(
         '--wallpaper-url', `url('${saved}')`
       );
     }
-  }, [isMobile]);
+  }, []);
 
   useEffect(() => {
     if (isMobile) return;
