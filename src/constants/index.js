@@ -69,13 +69,13 @@ const dockApps = [
   {
     id: "terminal",
     name: "小酷字体",
-    icon: "mfzt.png",
+    icon: "mfzt.svg",
     canOpen: true,
   },
   {
     id: "vscode",
     name: "LOGO下载",
-    icon: "logoxz.png",
+    icon: "logoxz.svg",
     canOpen: true,
   },
   {
@@ -464,7 +464,7 @@ const WORK_LOCATION = {
     {
       id: 5,
       name: "素材",
-      icon: "/images/folder.webp",
+      icon: "/images/folder.svg",
       kind: "folder",
       position: "top-14 left-16",
       windowPosition: "top-[80px] left-[120px]",
@@ -505,7 +505,7 @@ const WORK_LOCATION = {
     {
       id: 6,
       name: "字体",
-      icon: "/images/folder.webp",
+      icon: "/images/folder.svg",
       kind: "folder",
       position: "top-40 left-16",
       windowPosition: "top-[220px] left-[120px]",
@@ -548,7 +548,7 @@ const WORK_LOCATION = {
     {
       id: 7,
       name: "文件夹",
-      icon: "/images/folder.webp",
+      icon: "/images/folder.svg",
       kind: "folder",
       position: "top-65 left-15",
       windowPosition: "top-[360px] left-[120px]",
@@ -601,7 +601,7 @@ const WORK_LOCATION = {
     {
       id: 10,
       name: "书签",
-      icon: "/images/folder.webp",
+      icon: "/images/folder.svg",
       kind: "folder",
       position: "top-40 left-45",
       windowPosition: "top-[220px] left-[280px]",
@@ -642,7 +642,7 @@ const WORK_LOCATION = {
     {
       id: 11,
       name: "知识库",
-      icon: "/images/folder.webp",
+      icon: "/images/folder.svg",
       kind: "folder",
       position: "top-15 left-45",
       windowPosition: "top-[80px] left-[280px]",

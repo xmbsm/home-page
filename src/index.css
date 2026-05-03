@@ -1050,6 +1050,8 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
 
         img {
           @apply group-hover:bg-gray-950/10 p-1 rounded-md;
+          width: 72px;
+          height: 72px;
         }
 
         p {
@@ -1360,8 +1362,8 @@ html body #root .rt-tooltip[data-tooltip-id="dock-tooltip"] .rt-tooltip-content 
       display: flex !important;
       flex-wrap: wrap !important;
       justify-content: flex-start !important;
-      padding: 2rem 1rem 1rem 2rem !important;
-      gap: 1rem !important;
+      padding: 1.5rem 1rem 1rem 1.5rem !important;
+      gap: 1.5rem !important;
     }
     
     #home ul li {

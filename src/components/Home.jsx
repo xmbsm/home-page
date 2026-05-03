@@ -37,7 +37,7 @@ const Home = React.memo(() => {
             onClick={() => handleOpenProjectFinder(project)}
           >
             <img 
-              src="/images/folder.webp"
+              src="/images/folder.svg"
               alt={project.name}
               loading='lazy'
             />
